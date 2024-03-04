@@ -11,6 +11,9 @@
 		CE39AC3E2B966D4F0016E41A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE39AC3D2B966D4F0016E41A /* ContentView.swift */; };
 		CE39AC402B966D500016E41A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE39AC3F2B966D500016E41A /* Assets.xcassets */; };
 		CE39AC432B966D500016E41A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE39AC422B966D500016E41A /* Preview Assets.xcassets */; };
+		CEEBB8BD2B967F42000BF885 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEBB8BC2B967F42000BF885 /* HomeView.swift */; };
+		CEEBB8BF2B9685F8000BF885 /* RecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEBB8BE2B9685F8000BF885 /* RecipeView.swift */; };
+		CEEBB8C12B96933B000BF885 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = CEEBB8C02B96933B000BF885 /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +22,9 @@
 		CE39AC3D2B966D4F0016E41A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CE39AC3F2B966D500016E41A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE39AC422B966D500016E41A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CEEBB8BC2B967F42000BF885 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		CEEBB8BE2B9685F8000BF885 /* RecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeView.swift; sourceTree = "<group>"; };
+		CEEBB8C02B96933B000BF885 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +41,7 @@
 		CE39AC2F2B966D4F0016E41A = {
 			isa = PBXGroup;
 			children = (
+				CEEBB8C02B96933B000BF885 /* .gitignore */,
 				CE39AC3A2B966D4F0016E41A /* cheflenge */,
 				CE39AC392B966D4F0016E41A /* Products */,
 			);
@@ -53,8 +60,10 @@
 			children = (
 				CE39AC3B2B966D4F0016E41A /* cheflengeApp.swift */,
 				CE39AC3D2B966D4F0016E41A /* ContentView.swift */,
+				CEEBB8BC2B967F42000BF885 /* HomeView.swift */,
 				CE39AC3F2B966D500016E41A /* Assets.xcassets */,
 				CE39AC412B966D500016E41A /* Preview Content */,
+				CEEBB8BE2B9685F8000BF885 /* RecipeView.swift */,
 			);
 			path = cheflenge;
 			sourceTree = "<group>";
@@ -126,6 +135,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE39AC432B966D500016E41A /* Preview Assets.xcassets in Resources */,
+				CEEBB8C12B96933B000BF885 /* .gitignore in Resources */,
 				CE39AC402B966D500016E41A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -137,7 +147,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEEBB8BD2B967F42000BF885 /* HomeView.swift in Sources */,
 				CE39AC3E2B966D4F0016E41A /* ContentView.swift in Sources */,
+				CEEBB8BF2B9685F8000BF885 /* RecipeView.swift in Sources */,
 				CE39AC3C2B966D4F0016E41A /* cheflengeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
