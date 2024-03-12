@@ -10,29 +10,54 @@ import SwiftUI
 struct HomeView: View {
     var body: some View {
         NavigationStack {
-            VStack (spacing: 20, content: {
-                Text ("CHEF'LENGE").frame(maxWidth: .infinity, alignment: .leading).font(.largeTitle)
-                    .fontWeight(.bold)
-                VStack {
-                    Text ("Aujourd'hui").frame(maxWidth: .infinity, alignment: .leading)
-                    VStack {
-                        NavigationLink(destination: RecipeView()) {
-                            RoundedRectangle(cornerRadius: 30)
-                                .fill(Color.purple)
-                                    .aspectRatio(1.5, contentMode: .fit)
-                                    .frame(width: .infinity)
-                        }
-                    }
-                    
-                }
+            VStack(spacing: 28, content: {
+                TitleView(text: "CHEF'LENGE")
+                TodayRecipeView()
+                TimeBlockView()
             })
             .padding()
             Spacer()
         }
-        
     }
 }
 
 #Preview {
     HomeView()
+}
+
+struct TodayRecipeView: View {
+    var body: some View {
+        VStack {
+            SubTitleView(text: "Aujourd'hui")
+            VStack {
+                NavigationLink(destination: RecipeView()) {
+                    RoundedRectangle(cornerRadius: 30)
+                        .fill(Color.accentColor)
+                        .frame(width: .infinity, height: 200)
+                }
+            }
+        }
+    }
+}
+
+struct TimeBlockView: View {
+    var body: some View {
+        VStack {
+            SubTitleView(text: "Prochain défi dans")
+            ZStack {
+                Color.black
+                    .cornerRadius(30)
+                    .frame(maxHeight: 116)
+                HStack {
+                    Image(systemName: "clock")
+                        .resizable()
+                        .foregroundColor(.white)
+                        .scaledToFit()
+                        .frame(maxWidth: 50)
+                    Spacer()
+                    Text("14:18:26").foregroundColor(.white).font(.largeTitle)
+                }.padding(40)
+            }
+        }
+    }
 }

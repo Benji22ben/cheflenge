@@ -11,6 +11,9 @@
 		CE39AC3E2B966D4F0016E41A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE39AC3D2B966D4F0016E41A /* ContentView.swift */; };
 		CE39AC402B966D500016E41A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE39AC3F2B966D500016E41A /* Assets.xcassets */; };
 		CE39AC432B966D500016E41A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE39AC422B966D500016E41A /* Preview Assets.xcassets */; };
+		CEB83E502BA0DF5E00158775 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB83E4F2BA0DF5E00158775 /* TitleView.swift */; };
+		CEB83E522BA0F1B200158775 /* SubTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB83E512BA0F1B200158775 /* SubTitleView.swift */; };
+		CEB83E542BA0F29900158775 /* PageWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB83E532BA0F29900158775 /* PageWrapperView.swift */; };
 		CEEBB8BD2B967F42000BF885 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEBB8BC2B967F42000BF885 /* HomeView.swift */; };
 		CEEBB8BF2B9685F8000BF885 /* RecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEBB8BE2B9685F8000BF885 /* RecipeView.swift */; };
 		CEEBB8C12B96933B000BF885 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = CEEBB8C02B96933B000BF885 /* .gitignore */; };
@@ -22,6 +25,9 @@
 		CE39AC3D2B966D4F0016E41A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CE39AC3F2B966D500016E41A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE39AC422B966D500016E41A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CEB83E4F2BA0DF5E00158775 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		CEB83E512BA0F1B200158775 /* SubTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTitleView.swift; sourceTree = "<group>"; };
+		CEB83E532BA0F29900158775 /* PageWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageWrapperView.swift; sourceTree = "<group>"; };
 		CEEBB8BC2B967F42000BF885 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		CEEBB8BE2B9685F8000BF885 /* RecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeView.swift; sourceTree = "<group>"; };
 		CEEBB8C02B96933B000BF885 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -62,8 +68,9 @@
 				CE39AC3D2B966D4F0016E41A /* ContentView.swift */,
 				CEEBB8BC2B967F42000BF885 /* HomeView.swift */,
 				CE39AC3F2B966D500016E41A /* Assets.xcassets */,
-				CE39AC412B966D500016E41A /* Preview Content */,
 				CEEBB8BE2B9685F8000BF885 /* RecipeView.swift */,
+				CEB83E4C2BA0D49200158775 /* Components */,
+				CE39AC412B966D500016E41A /* Preview Content */,
 			);
 			path = cheflenge;
 			sourceTree = "<group>";
@@ -74,6 +81,16 @@
 				CE39AC422B966D500016E41A /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		CEB83E4C2BA0D49200158775 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				CEB83E4F2BA0DF5E00158775 /* TitleView.swift */,
+				CEB83E512BA0F1B200158775 /* SubTitleView.swift */,
+				CEB83E532BA0F29900158775 /* PageWrapperView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,8 +166,11 @@
 			files = (
 				CEEBB8BD2B967F42000BF885 /* HomeView.swift in Sources */,
 				CE39AC3E2B966D4F0016E41A /* ContentView.swift in Sources */,
+				CEB83E522BA0F1B200158775 /* SubTitleView.swift in Sources */,
 				CEEBB8BF2B9685F8000BF885 /* RecipeView.swift in Sources */,
+				CEB83E542BA0F29900158775 /* PageWrapperView.swift in Sources */,
 				CE39AC3C2B966D4F0016E41A /* cheflengeApp.swift in Sources */,
+				CEB83E502BA0DF5E00158775 /* TitleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct RecipeView: View {
+    var recette = "Tartiflette : la vraie recette"
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        TitleView(text: "DÉFI DU JOUR")
+        SubTitleView(text: recette)
+        Spacer()
     }
 }
 
