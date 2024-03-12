@@ -11,7 +11,7 @@ struct SubTitleView: View {
     var text: String = "Subtitle"
 
     var body: some View {
-        Text(text).frame(maxWidth: .infinity, alignment: .leading).fontWeight(.bold)
+        Text(text).frame(maxWidth: .infinity, alignment: .leading).font(.title2)
     }
 }
 

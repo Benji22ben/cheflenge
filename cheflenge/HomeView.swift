@@ -10,12 +10,11 @@ import SwiftUI
 struct HomeView: View {
     var body: some View {
         NavigationStack {
-            VStack(spacing: 28, content: {
+            PageWrapperView {
                 TitleView(text: "CHEF'LENGE")
                 TodayRecipeView()
                 TimeBlockView()
-            })
-            .padding()
+            }
             Spacer()
         }
     }
