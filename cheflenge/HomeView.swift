@@ -48,13 +48,19 @@ struct TimeBlockView: View {
                     .cornerRadius(30)
                     .frame(maxHeight: 116)
                 HStack {
+                    let currentDate = Date()
+                    let calendar = Calendar.current
+                    let hour = calendar.component(.hour, from: currentDate)
+                    let minutes = calendar.component(.minute, from: currentDate)
+                    let seconds = calendar.component(.second, from: currentDate)
+
                     Image(systemName: "clock")
                         .resizable()
                         .foregroundColor(.white)
                         .scaledToFit()
                         .frame(maxWidth: 50)
                     Spacer()
-                    Text("14:18:26").foregroundColor(.white).font(.largeTitle)
+                    Text("\(hour):\(minutes):\(seconds)").foregroundColor(.white).font(.largeTitle)
                 }.padding(40)
             }
         }
