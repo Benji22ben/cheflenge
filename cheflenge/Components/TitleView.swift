@@ -12,7 +12,7 @@ struct TitleView: View {
 
     var body: some View {
         Text(text).frame(maxWidth: .infinity, alignment: .leading).font(.largeTitle)
-            .fontWeight(.bold)
+            .fontWeight(.bold).foregroundStyle(Color("TertiaryColor"))
     }
 }
 
