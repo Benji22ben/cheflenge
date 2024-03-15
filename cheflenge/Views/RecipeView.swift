@@ -37,17 +37,17 @@ struct RecipeView: View {
                         }
                     }
                 }
-                Button {
-                    // Add your button action here
-                } label: {
-                    Label("Valider le défi", systemImage: "camera.fill")
-                }
-                .padding(.horizontal, 30)
-                .padding(.vertical, 20)
-                .background(Color.accentColor)
-                .foregroundColor(Color.white)
-                .cornerRadius(10)
-                .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 3)
+                NavigationLink(destination: CameraView()) {
+                    // Button {} label: {
+                    // Label("Valider le défi", systemImage: "camera.fill")
+                    // }
+                    Text("Valider le défi")
+                }.padding(.horizontal, 30)
+                    .padding(.vertical, 20)
+                    .background(Color.accentColor)
+                    .foregroundColor(Color.white)
+                    .cornerRadius(10)
+                    .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 3)
             }
         }
     }
