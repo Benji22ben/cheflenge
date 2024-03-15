@@ -35,77 +35,43 @@ struct GalleryView: View {
     }
 
     var body: some View {
-        ZStack {
-            ScrollView {
-                VStack(spacing: 10) {
-                    ForEach(0..<filteredRecipes.count, id: \.self) { index in
-                        if index % 3 == 0 { // Premier cas sur 3 : 2 images (1/3, 2/3)
-                            HStack(spacing: 10) {
-                                Image(filteredRecipes[index].imageName)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .clipped()
-                                    .cornerRadius(10)
-                                    .frame(maxWidth: UIScreen.main.bounds.width * 1 / 3)
-                                    .frame(height: 150)
+            ZStack {
+                ScrollView {
+                    VStack(spacing: 10) {
+                        ForEach(0..<filteredRecipes.count, id: \.self) { index in
+                            if index % 2 == 0 {
+                                HStack(spacing: 10) {
+                                    RecipeImageView(imageName: filteredRecipes[index].imageName, maxWidth: 1 / 3)
                                     
-                                
-                                Image(filteredRecipes[index + 1].imageName)
-                                    .resizable()
-                                    .cornerRadius(10)
-                                    .aspectRatio(contentMode: .fill)
-                                    .clipped()
-                                    .frame(maxWidth: UIScreen.main.bounds.width * 2 / 3)
-                                    .frame(height: 150)
-              
-                            }
-                            .padding(.horizontal, 10)
-                        } else if index % 3 == 1 { // Deuxième cas sur 3 : 2 images (2/3, 1/3)
-                            HStack(spacing: 10) {
-                                Image(filteredRecipes[index].imageName)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(maxWidth: UIScreen.main.bounds.width * 2 / 3)
-                                    .frame(height: 150)
-                                    .cornerRadius(10)
-                                    .clipped()
-                     
-                                
-                                Image(filteredRecipes[index + 1].imageName)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(maxWidth: UIScreen.main.bounds.width * 1 / 3)
-                                    .frame(height: 150)
-                                    .cornerRadius(10)
-                                    .clipped()
-                            
-                            }
-                            .padding(.horizontal, 10)
-                        } else { // Troisième cas sur 3 : 1 image prenant toute la largeur
-                            Image(filteredRecipes[index].imageName)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .frame(maxWidth: UIScreen.main.bounds.width)
-                                .frame(height: 150)
-                                .cornerRadius(10)
-                                .clipped()
-                                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 0))
+                                    if index + 1 < filteredRecipes.count {
+                                        RecipeImageView(imageName: filteredRecipes[index + 1].imageName, maxWidth: 2 / 3)
+                                    }
+                                }
                                 .padding(.horizontal, 10)
+                            } else {
+                                HStack(spacing: 10) {
+                                    RecipeImageView(imageName: filteredRecipes[index].imageName, maxWidth: 2 / 3)
+                                    
+                                    if index + 1 < filteredRecipes.count {
+                                        RecipeImageView(imageName: filteredRecipes[index + 1].imageName, maxWidth: 1 / 3)
+                                    }
+                                }
+                                .padding(.horizontal, 10)
+                            }
                         }
                     }
+                    .padding(.top, 60)
                 }
-                .padding(.top, 60)
-            }
-            
-            VStack {
-                SearchBar(text: $searchText)
-                    .padding(.horizontal)
-                    .padding(.bottom, 10)
-                    .background(Color.white)
-                Spacer()
+                
+                VStack {
+                    SearchBar(text: $searchText)
+                        .padding(.horizontal)
+                        .padding(.bottom, 10)
+                        .background(Color.white)
+                    Spacer()
+                }
             }
         }
-    }
 }
 
 
@@ -113,4 +79,19 @@ struct GalleryView: View {
 
 #Preview {
     GalleryView()
+}
+
+struct RecipeImageView: View {
+    var imageName: String
+    var maxWidth:CGFloat
+    
+    var body: some View {
+        Image(imageName)
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(maxWidth: UIScreen.main.bounds.width * maxWidth)
+            .frame(height: 150)
+            .cornerRadius(10)
+            .clipped()
+    }
 }
