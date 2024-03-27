@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject var recipeoftheday: RecipeOfTheDayFlow
+    @State private var photoCollection: PhotoCollection?
+
     var body: some View {
         NavigationStack {
             PageWrapperView {
@@ -17,6 +20,9 @@ struct HomeView: View {
             }
             Spacer()
         }
+//        .navigationDestination(for: RecipeOfTheDayNavigation.self) { destination in
+//            RecipeOfTheDayPath.setViewForDestination(destination, photoCollection)
+//        }
     }
 }
 
@@ -25,11 +31,14 @@ struct HomeView: View {
 }
 
 struct TodayRecipeView: View {
+    @StateObject var recipeOfTheDay = RecipeOfTheDayDataManager()
+    @StateObject var recipeOfTheDayFlow = RecipeOfTheDayFlow()
+
     var body: some View {
         VStack {
             SubTitleView(text: "Aujourd'hui")
-            VStack {
-                NavigationLink(destination: RecipeView()) {
+            NavigationStack(path: $recipeOfTheDayFlow.path) {
+                VStack {
                     ZStack(alignment: .bottom) {
                         Image("recipeoftheday")
                             .resizable()
@@ -51,7 +60,7 @@ struct TodayRecipeView: View {
                     }
                     .frame(width: .infinity, height: 200)
                 }
-            }
+            }.environmentObject(recipeOfTheDayFlow)
         }
     }
 }
