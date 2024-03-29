@@ -10,9 +10,10 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
-            HomeView().badge(/*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/).tabItem {
-                Label("Home", systemImage: "house")
-            }
+            HomeView()
+                .badge(/*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/).tabItem {
+                    Label("Home", systemImage: "house")
+                }
         }
     }
 }

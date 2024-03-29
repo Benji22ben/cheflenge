@@ -10,7 +10,7 @@ import os.log
 import SwiftUI
 
 struct CameraView: View {
-    @StateObject private var model = DataModel()
+    @StateObject private var model = PicturesModel()
 
     private static let barHeightFactor = 0.15
 
@@ -44,10 +44,11 @@ struct CameraView: View {
             }
             .navigationTitle("Camera")
             .navigationBarTitleDisplayMode(.inline)
-            .navigationBarHidden(true)
             .ignoresSafeArea()
             .statusBar(hidden: true)
-        }
+        }.onDisappear(
+            perform: model.camera.stop
+        )
     }
 
     private func buttonsView() -> some View {

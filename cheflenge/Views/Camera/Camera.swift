@@ -1,9 +1,6 @@
-//
-//  PhotoAsset.swift
-//  cheflenge
-//
-//  Created by Benjamin MARQUES on 15/03/2024.
-//
+/*
+ See the License.txt file for this sample’s licensing information.
+ */
 
 import AVFoundation
 import CoreImage
@@ -34,7 +31,16 @@ class Camera: NSObject {
     
     private var captureDevices: [AVCaptureDevice] {
         var devices = [AVCaptureDevice]()
+        #if os(macOS) || (os(iOS) && targetEnvironment(macCatalyst))
         devices += allCaptureDevices
+        #else
+        if let backDevice = backCaptureDevices.first {
+            devices += [backDevice]
+        }
+        if let frontDevice = frontCaptureDevices.first {
+            devices += [frontDevice]
+        }
+        #endif
         return devices
     }
     

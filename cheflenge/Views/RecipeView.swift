@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct RecipeView: View {
-    var recette = "Tartiflette : la vraie recette"
+    @EnvironmentObject var recipeOfTheDay: RecipeOfTheDayDataManager
+    @EnvironmentObject var recipeOfTheDayFlow: RecipeOfTheDayFlow
 
     var numberOfRectangle = 5
 
@@ -16,31 +17,28 @@ struct RecipeView: View {
         ScrollView {
             PageWrapperView {
                 TitleView(text: "DÉFI DU JOUR")
-                SubTitleView(text: recette)
+                SubTitleView(text: recipeOfTheDay.recipeOfTheDay.name)
                 Rectangle().fill(Color.white)
                     .cornerRadius(30)
                     .frame(height: 116)
                     .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 3)
             }
 
-            VStack(spacing: 28, content: {
-                ScrollElementsView(subTitle: "Ingrédients")
-                ScrollElementsView(subTitle: "Ustensiles")
+            VStack(spacing: 32, content: {
+                ScrollElementsView(subTitle: "Ingrédients", recipeOptions: recipeOfTheDay.recipeOfTheDay.ingredients)
+                ScrollElementsView(subTitle: "Ustensiles", recipeOptions: recipeOfTheDay.recipeOfTheDay.ustensiles)
             })
             PageWrapperView {
-                ForEach(1 ... 10, id: \.self) { index in
+                ForEach(Array(recipeOfTheDay.recipeOfTheDay.steps.enumerated()), id: \.element) { index, step in
                     VStack {
-                        HStack {
-                            Text("\(index).")
+                        HStack(alignment: .top) {
+                            Text("\(index + 1).")
                                 .fontWeight(.bold)
-                            Text("this is a step of the recipe and this is long to test it")
-                        }
+                            Text(step)
+                        }.frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
-                NavigationLink(destination: CameraView()) {
-                    // Button {} label: {
-                    // Label("Valider le défi", systemImage: "camera.fill")
-                    // }
+                NavigationLink(destination: CameraView().toolbar(.hidden, for: .tabBar)) {
                     Text("Valider le défi")
                 }.padding(.horizontal, 30)
                     .padding(.vertical, 20)
@@ -55,6 +53,7 @@ struct RecipeView: View {
 
 struct ScrollElementsView: View {
     var subTitle: String = "Subtitle"
+    var recipeOptions: [RecipeOfTheDay.RecipeOptions] = []
 
     var body: some View {
         VStack {
@@ -63,18 +62,23 @@ struct ScrollElementsView: View {
 
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
-                    ForEach(1 ... 6, id: \.self) { _ in
+                    ForEach(recipeOptions, id: \.self) { recipeOption in
                         VStack {
-                            Rectangle()
-                                .fill(Color.white)
-                                .cornerRadius(30)
-                                .frame(width: 150, height: 150)
-                                .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 3)
-                            Text("coucou").underline()
+                            ZStack {
+                                Color(Color.white)
+
+                                Text(recipeOption.picture + ".jpg")
+                            }
+                            .cornerRadius(30)
+                            .frame(width: 150, height: 150)
+                            .shadow(radius: 3)
+
+                            Text(recipeOption.name).underline()
                         }
                     }
                 }
-                .padding(.leading, 16)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 6)
             }
         }
     }
@@ -82,4 +86,6 @@ struct ScrollElementsView: View {
 
 #Preview {
     RecipeView()
+        .environmentObject(RecipeOfTheDayDataManager())
+        .environmentObject(RecipeOfTheDayFlow())
 }

@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct HomeView: View {
-    @EnvironmentObject var recipeoftheday: RecipeOfTheDayFlow
-    @State private var photoCollection: PhotoCollection?
+    @StateObject var recipeOfTheDay = RecipeOfTheDayDataManager()
+    @StateObject var recipeOfTheDayFlow = RecipeOfTheDayFlow()
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $recipeOfTheDayFlow.path) {
             PageWrapperView {
                 TitleView(text: "CHEF'LENGE")
                 TodayRecipeView()
@@ -20,9 +20,8 @@ struct HomeView: View {
             }
             Spacer()
         }
-//        .navigationDestination(for: RecipeOfTheDayNavigation.self) { destination in
-//            RecipeOfTheDayPath.setViewForDestination(destination, photoCollection)
-//        }
+        .environmentObject(recipeOfTheDay)
+        .environmentObject(recipeOfTheDayFlow)
     }
 }
 
@@ -31,36 +30,33 @@ struct HomeView: View {
 }
 
 struct TodayRecipeView: View {
-    @StateObject var recipeOfTheDay = RecipeOfTheDayDataManager()
-    @StateObject var recipeOfTheDayFlow = RecipeOfTheDayFlow()
-
     var body: some View {
         VStack {
             SubTitleView(text: "Aujourd'hui")
-            NavigationStack(path: $recipeOfTheDayFlow.path) {
-                VStack {
-                    ZStack(alignment: .bottom) {
+            VStack {
+                ZStack(alignment: .bottom) {
+                    NavigationLink(destination: RecipeView()) {
                         Image("recipeoftheday")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .clipped()
-                            .frame(width: .infinity, height: 200)
+                            .frame(height: 200)
                             .cornerRadius(30)
-
-                        ZStack {
-                            Color.accentColor
-                                .cornerRadius(10)
-                            HStack {
-                                Text("Défi du jour").foregroundStyle(Color("SecondColor"))
-
-                                Image(systemName: "arrow.right").foregroundColor(Color("SecondColor"))
-                            }.padding(.horizontal, 30)
-                        }.frame(width: 260, height: 50, alignment: .bottom)
-                            .padding()
                     }
-                    .frame(width: .infinity, height: 200)
+
+                    ZStack {
+                        Color.accentColor
+                            .cornerRadius(10)
+                        HStack {
+                            Text("Défi du jour").foregroundStyle(Color("SecondColor"))
+
+                            Image(systemName: "arrow.right").foregroundColor(Color("SecondColor"))
+                        }.padding(.horizontal, 30)
+                    }.frame(width: 260, height: 50, alignment: .bottom)
+                        .padding()
                 }
-            }.environmentObject(recipeOfTheDayFlow)
+                .frame(height: 200)
+            }
         }
     }
 }

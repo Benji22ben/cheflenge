@@ -52,22 +52,11 @@ struct PhotoView: View {
         HStack(spacing: 60) {
             Button {
                 Task {
+                    // TODO: Send Picture from here
                     await asset.setIsFavorite(!asset.isFavorite)
                 }
             } label: {
                 Label("Favorite", systemImage: asset.isFavorite ? "heart.fill" : "heart")
-                    .font(.system(size: 24))
-            }
-
-            Button {
-                Task {
-                    await asset.delete()
-                    await MainActor.run {
-                        dismiss()
-                    }
-                }
-            } label: {
-                Label("Delete", systemImage: "trash")
                     .font(.system(size: 24))
             }
         }

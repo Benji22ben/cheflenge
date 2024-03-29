@@ -6,7 +6,7 @@ import AVFoundation
 import os.log
 import SwiftUI
 
-final class DataModel: ObservableObject {
+final class PicturesModel: ObservableObject {
     let camera = Camera()
     let photoCollection = PhotoCollection(smartAlbum: .smartAlbumUserLibrary)
     
@@ -138,4 +138,4 @@ private extension Image.Orientation {
     }
 }
 
-private let logger = Logger(subsystem: "com.apple.swiftplaygroundscontent.capturingphotos", category: "DataModel")
+private let logger = Logger(subsystem: "com.apple.swiftplaygroundscontent.capturingphotos", category: "PicturesModel")
