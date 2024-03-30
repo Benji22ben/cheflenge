@@ -7,22 +7,31 @@
 
 import SwiftUI
 
-struct GridItem: Identifiable {
-    let id = UUID()
-    let height: CGFloat = CGFloat.random(in: 150...400)
-    let imgString: String
-    let title: String
-    let creationDate: Date
+class GridItem: Identifiable, ObservableObject {
+    var id = UUID()
+    var height: CGFloat = CGFloat.random(in: 150...400)
+    var imgString: String
+    var title: String
+    var creationDate: Date
+    @Published var favorite: Bool
+    
+    init(imgString: String, title: String, creationDate: Date, favorite: Bool = false) {
+        self.imgString = imgString
+        self.title = title
+        self.creationDate = creationDate
+        self.favorite = favorite
+    }
 }
+
 
 struct GridTable: View {
     
     struct Column: Identifiable {
         let id = UUID()
-        var gridItems = [GridItem]()
+        var gridItems: [GridItem]
     }
     
-    let columns: [Column]
+    var columns: [Column]
     
     let spacing: CGFloat
     let horizontalPadding: CGFloat
@@ -32,8 +41,8 @@ struct GridTable: View {
         self.horizontalPadding = horizontalPadding
         
         var columns = [Column]()
-        for _ in 0 ..< numOfColumns {
-            columns.append(Column())
+        for _ in 0..<numOfColumns {
+            columns.append(Column(gridItems: []))
         }
         
         var columnsHeight = Array<CGFloat>(repeating: 0, count: numOfColumns)
@@ -41,7 +50,7 @@ struct GridTable: View {
         for gridItem in gridItems {
             var smallestColumnIndex = 0
             var smallestHeight = columnsHeight.first!
-            for i in 1 ..< columnsHeight.count {
+            for i in 1..<columnsHeight.count {
                 let curHeight = columnsHeight[i]
                 if curHeight < smallestHeight {
                     smallestHeight = curHeight
@@ -59,19 +68,22 @@ struct GridTable: View {
     var body: some View {
         HStack(alignment: .top, spacing: spacing) {
             ForEach(columns) { column in
-                LazyVStack(spacing: spacing) { 
-                    ForEach(column.gridItems) { gridItem in
-                    
-                        getItemView(gridItem: gridItem)
-                        
+                LazyVStack(spacing: spacing) {
+                    ForEach(column.gridItems.indices, id: \.self) { index in
+                        let gridItem = column.gridItems[index]
+                        GridItemView(gridItem: gridItem)
                     }
                 }
             }
         }
         .padding(.horizontal, horizontalPadding)
     }
+}
+
+struct GridItemView: View {
+    @StateObject var gridItem: GridItem
     
-    func getItemView(gridItem: GridItem) -> some View {
+    var body: some View {
         ZStack(alignment: .bottomLeading) {
             GeometryReader { reader in
                 Image(gridItem.imgString)
@@ -82,13 +94,31 @@ struct GridTable: View {
                            alignment: .center)
             }
             
-            Text(gridItem.title)
-                .foregroundColor(.white)
-                .font(.caption)
-                .padding(8)
-                .background(Color.accentColor.opacity(0.9))
-                .clipShape(RoundedRectangle(cornerRadius: 8))
-                .padding(8)
+            VStack(alignment: .leading, spacing: 0) {
+                HStack {
+                    Button(action: {
+                        gridItem.favorite.toggle()
+                    }) {
+                        Image(systemName: gridItem.favorite ? "star.fill" : "star")
+                            .foregroundColor(gridItem.favorite ? .yellow : .white)
+                            .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .foregroundColor(Color.black.opacity(0.2))
+                                    .frame(width: 30, height: 30)
+                            )
+                    }
+                    .padding(.leading, 12)
+                    .padding(.top, 12)
+                }
+                Spacer()
+                Text(gridItem.title)
+                    .foregroundColor(.white)
+                    .font(.caption)
+                    .padding(8)
+                    .background(Color.accentColor.opacity(0.9))
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .padding(8)
+            }
         }
         .frame(height: gridItem.height)
         .frame(maxWidth: .infinity)
@@ -96,8 +126,11 @@ struct GridTable: View {
     }
 }
 
+
+
 #Preview {
     GalleryView()
 }
+
 
 
