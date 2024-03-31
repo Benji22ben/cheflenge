@@ -8,20 +8,24 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject var recipeOfTheDay = RecipeOfTheDayDataManager()
-    @StateObject var recipeOfTheDayFlow = RecipeOfTheDayFlow()
+    @StateObject var recipeOfTheDayModel = RecipeOfTheDayModel()
+    @StateObject var recipeFlow = RecipeFlow()
 
     var body: some View {
-        NavigationStack(path: $recipeOfTheDayFlow.path) {
+        NavigationStack(path: $recipeFlow.path) {
             PageWrapperView {
                 TitleView(text: "CHEF'LENGE")
-                TodayRecipeView()
-                TimeBlockView()
+                TodayRecipeView(imageOfRecipe: recipeOfTheDayModel.recipe.image?.url ?? "")
+                TimeBlockView(dateFromAPI: recipeOfTheDayModel.recipe.endEvent)
             }
             Spacer()
         }
-        .environmentObject(recipeOfTheDay)
-        .environmentObject(recipeOfTheDayFlow)
+        .onAppear {
+            recipeOfTheDayModel.fetchRecipeOfTheDay()
+            print(recipeOfTheDayModel.recipe)
+        }
+        .environmentObject(recipeOfTheDayModel)
+        .environmentObject(recipeFlow)
     }
 }
 
@@ -30,18 +34,22 @@ struct HomeView: View {
 }
 
 struct TodayRecipeView: View {
+    var imageOfRecipe: String = ""
+
     var body: some View {
         VStack {
             SubTitleView(text: "Aujourd'hui")
             VStack {
                 ZStack(alignment: .bottom) {
                     NavigationLink(destination: RecipeView()) {
-                        Image("recipeoftheday")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .clipped()
-                            .frame(height: 200)
-                            .cornerRadius(30)
+                        AsyncImage(url: URL(string: "\(API.BASE_URL)\(imageOfRecipe)"), content: { image in
+                            image.resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .clipped()
+                                .frame(height: 200)
+                                .cornerRadius(30)
+                        },
+                        placeholder: { ProgressView() })
                     }
 
                     ZStack {
@@ -62,6 +70,14 @@ struct TodayRecipeView: View {
 }
 
 struct TimeBlockView: View {
+    var dateFromAPI: String = ""
+    let dateFormatter = DateFormatter()
+
+    var remainTime: Date? {
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ" // Set the desired date format
+        return dateFormatter.date(from: dateFromAPI)
+    }
+
     var body: some View {
         VStack {
             SubTitleView(text: "Prochain défi dans")
@@ -69,19 +85,25 @@ struct TimeBlockView: View {
                 Color("TertiaryColor").cornerRadius(30)
                     .frame(maxHeight: 116)
                 HStack {
-                    let currentDate = Date()
-                    let calendar = Calendar.current
-                    let hour = calendar.component(.hour, from: currentDate)
-                    let minutes = calendar.component(.minute, from: currentDate)
-                    let seconds = calendar.component(.second, from: currentDate)
-
                     Image(systemName: "clock")
                         .resizable()
                         .foregroundColor(Color("SecondColor"))
                         .scaledToFit()
                         .frame(maxWidth: 50)
                     Spacer()
-                    Text("\(hour):\(minutes):\(seconds)").foregroundColor(Color("SecondColor")).font(.largeTitle)
+                    if let remainTime = remainTime {
+                        let calendar = Calendar.current
+                        let currentDate = Date()
+                        let components = calendar.dateComponents([.hour, .minute, .second], from: currentDate, to: remainTime)
+
+                        let hour = components.hour ?? 0
+                        let minute = components.minute ?? 0
+                        let second = components.second ?? 0
+
+                        Text("\(hour):\(minute):\(second)").foregroundColor(Color("SecondColor")).font(.largeTitle)
+                    } else {
+                        Text("Invalid date format").foregroundColor(Color("SecondColor")).font(.largeTitle)
+                    }
                 }.padding(40)
             }
         }

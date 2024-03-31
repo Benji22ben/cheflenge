@@ -1,5 +1,5 @@
 //
-//  RecipeOfTheDayNavigation.swift
+//  RecipeNavigation.swift
 //  cheflenge
 //
 //  Created by Benjamin MARQUES on 15/03/2024.
@@ -8,149 +8,176 @@
 import Foundation
 import SwiftUI
 
-enum RecipeOfTheDayNavigation {
-    case Recipe
-    case Camera
-    case Library
-}
-
-struct RecipeOfTheDay: Identifiable {
-    struct RecipeOptions: Identifiable, Hashable {
-        let id: UUID
+struct StrapiPictures: Identifiable, Decodable, Equatable, Hashable {
+    struct Format: Decodable, Equatable, Hashable {
         let name: String
-        let picture: String
+        let hash: String?
+        let ext: String?
+        let mime: String?
+        let path: String?
+        let width: Int
+        let height: Int
+        let size: Float
+        let sizeInBytes: Int
+        let url: String
+
+        static func == (lhs: Format, rhs: Format) -> Bool {
+            return lhs.name == rhs.name &&
+                lhs.hash == rhs.hash &&
+                lhs.ext == rhs.ext &&
+                lhs.mime == rhs.mime &&
+                lhs.path == rhs.path &&
+                lhs.width == rhs.width &&
+                lhs.height == rhs.height &&
+                lhs.size == rhs.size &&
+                lhs.sizeInBytes == rhs.sizeInBytes &&
+                lhs.url == rhs.url
+        }
     }
 
-    let id: UUID
+    struct Formats: Decodable, Equatable, Hashable {
+        let thumbnail: Format?
+        let small: Format?
+        let medium: Format?
+        let large: Format?
+
+        enum CodingKeys: String, CodingKey {
+            case thumbnail
+            case small
+            case medium
+            case large
+        }
+
+        init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+
+            thumbnail = try container.decodeIfPresent(Format.self, forKey: .thumbnail)
+            small = try container.decodeIfPresent(Format.self, forKey: .small)
+            medium = try container.decodeIfPresent(Format.self, forKey: .medium)
+            large = try container.decodeIfPresent(Format.self, forKey: .large)
+        }
+
+        static func == (lhs: Formats, rhs: Formats) -> Bool {
+            return lhs.thumbnail == rhs.thumbnail &&
+                lhs.small == rhs.small &&
+                lhs.medium == rhs.medium &&
+                lhs.large == rhs.large
+        }
+    }
+
+    let id: Int
     let name: String
-    let image: String
+    let alternativeText: String?
+    let caption: String?
+    let width: Int
+    let height: Int
+    let formats: Formats
+    let hash: String?
+    let ext: String?
+    let mime: String?
+    let size: Float
+    let url: String
+    let previewUrl: String?
+    let provider: String?
+    let provider_metadata: String?
+    let folderPath: String
+    let createdAt: String
+    let updatedAt: String
+
+    static func == (lhs: StrapiPictures, rhs: StrapiPictures) -> Bool {
+        return lhs.id == rhs.id &&
+            lhs.name == rhs.name &&
+            lhs.alternativeText == rhs.alternativeText &&
+            lhs.caption == rhs.caption &&
+            lhs.width == rhs.width &&
+            lhs.height == rhs.height &&
+            lhs.formats == rhs.formats &&
+            lhs.hash == rhs.hash &&
+            lhs.ext == rhs.ext &&
+            lhs.mime == rhs.mime &&
+            lhs.size == rhs.size &&
+            lhs.url == rhs.url &&
+            lhs.previewUrl == rhs.previewUrl &&
+            lhs.provider == rhs.provider &&
+            lhs.provider_metadata == rhs.provider_metadata &&
+            lhs.folderPath == rhs.folderPath &&
+            lhs.createdAt == rhs.createdAt &&
+            lhs.updatedAt == rhs.updatedAt
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(name)
+        hasher.combine(alternativeText)
+        hasher.combine(caption)
+        hasher.combine(width)
+        hasher.combine(height)
+        hasher.combine(formats)
+        hasher.combine(hash)
+        hasher.combine(ext)
+        hasher.combine(mime)
+        hasher.combine(size)
+        hasher.combine(url)
+        hasher.combine(previewUrl)
+        hasher.combine(provider)
+        hasher.combine(provider_metadata)
+        hasher.combine(folderPath)
+        hasher.combine(createdAt)
+        hasher.combine(updatedAt)
+    }
+}
+
+struct Recipe: Identifiable, Decodable {
+    struct RecipeOptions: Identifiable, Hashable, Decodable {
+        let id: Int
+        let name: String
+        let photo: StrapiPictures?
+        let createdAt: String
+        let updatedAt: String
+        let publishedAt: String
+    }
+
+    let id: Int
+    let title: String
+    let image: StrapiPictures?
+    let preparationStage: [String]
+    let isEvent: Bool?
+    let endEvent: String
     let ingredients: [RecipeOptions]
-    let ustensiles: [RecipeOptions]
-    let steps: [String]
+    let utensils: [RecipeOptions]
+    let createdAt: String
+    let updatedAt: String
+    let publishedAt: String
+}
 
-    init(id: UUID, name: String, image: String, ingredients: [RecipeOptions], ustensiles: [RecipeOptions], steps: [String]) {
-        self.id = UUID()
-        self.name = name
-        self.image = image
-        self.ingredients = ingredients
-        self.ustensiles = ustensiles
-        self.steps = steps
-    }
+class RecipeOfTheDayModel: ObservableObject {
+    @Published var recipe = Recipe(id: 1, title: "", image: nil, preparationStage: [], isEvent: false, endEvent: "", ingredients: [], utensils: [], createdAt: "", updatedAt: "", publishedAt: "")
+    func fetchRecipeOfTheDay() {
+        let url = API.BASE_URL.appendingPathComponent("/\(API.Paths.recipeOfTheDay)")
 
-    static func example() -> RecipeOfTheDay {
-        RecipeOfTheDay(
-            id: UUID(),
-            name: "Spaghetti Bolognese",
-            image: "spaghetti_bolognese.jpg",
-            ingredients: [
-                RecipeOfTheDay.RecipeOptions(id: UUID(), name: "Spaghetti", picture: "spaghetti"),
-                RecipeOfTheDay.RecipeOptions(id: UUID(), name: "Ground Beef", picture: "ground_beef"),
-                RecipeOfTheDay.RecipeOptions(id: UUID(), name: "Tomato Sauce", picture: "tomato_sauce")
-            ],
-            ustensiles: [
-                RecipeOfTheDay.RecipeOptions(id: UUID(), name: "Pot", picture: "pot"),
-                RecipeOfTheDay.RecipeOptions(id: UUID(), name: "Pan", picture: "pan")
-            ],
-            steps: [
-                "Cook the spaghetti according to the package instructions.",
-                "In a pan, cook the ground beef until browned.",
-                "Add the tomato sauce to the pan and simmer for 10 minutes.",
-                "Drain the spaghetti and serve with the meat sauce on top."
-            ])
-    }
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzExOTA4MDIyLCJleHAiOjE3MTQ1MDAwMjJ9.YjXYh8n-PmnWdwIEeeGaITcJtHmnTkpZEVvVYm9ETcE", forHTTPHeaderField: "Authorization")
 
-    static func examples() -> [RecipeOfTheDay] {
-        [
-            RecipeOfTheDay(
-                id: UUID(),
-                name: "Spaghetti Bolognese",
-                image: "spaghetti_bolognese.jpg",
-                ingredients: [
-                    RecipeOfTheDay.RecipeOptions(id: UUID(), name: "Spaghetti", picture: "spaghetti"),
-                    RecipeOfTheDay.RecipeOptions(id: UUID(), name: "Ground Beef", picture: "ground_beef"),
-                    RecipeOfTheDay.RecipeOptions(id: UUID(), name: "Tomato Sauce", picture: "tomato_sauce")
-                ],
-                ustensiles: [
-                    RecipeOfTheDay.RecipeOptions(id: UUID(), name: "Pot", picture: "pot"),
-                    RecipeOfTheDay.RecipeOptions(id: UUID(), name: "Pan", picture: "pan")
-                ],
-                steps: [
-                    "Cook the spaghetti according to the package instructions.",
-                    "In a pan, cook the ground beef until browned.",
-                    "Add the tomato sauce to the pan and simmer for 10 minutes.",
-                    "Drain the spaghetti and serve with the meat sauce on top."
-                ]),
-            RecipeOfTheDay(
-                id: UUID(),
-                name: "Vegetable Stir Fry",
-                image: "vegetable_stir_fry.jpg",
-                ingredients: [
-                    RecipeOfTheDay.RecipeOptions(id: UUID(), name: "Bell Peppers", picture: "bell_peppers"),
-                    RecipeOfTheDay.RecipeOptions(id: UUID(), name: "Broccoli", picture: "broccoli"),
-                    RecipeOfTheDay.RecipeOptions(id: UUID(), name: "Soy Sauce", picture: "soy_sauce")
-                ],
-                ustensiles: [
-                    RecipeOfTheDay.RecipeOptions(id: UUID(), name: "Wok", picture: "wok"),
-                    RecipeOfTheDay.RecipeOptions(id: UUID(), name: "Spatula", picture: "spatula")
-                ],
-                steps: [
-                    "Heat oil in a wok over high heat.",
-                    "Add the bell peppers and broccoli and stir fry for 5 minutes.",
-                    "Add the soy sauce and stir fry for another 2 minutes.",
-                    "Serve hot with rice."
-                ]),
-            RecipeOfTheDay(
-                id: UUID(),
-                name: "Chicken Curry",
-                image: "chicken_curry.jpg",
-                ingredients: [
-                    RecipeOfTheDay.RecipeOptions(id: UUID(), name: "Chicken Breast", picture: "chicken_breast"),
-                    RecipeOfTheDay.RecipeOptions(id: UUID(), name: "Curry Powder", picture: "curry_powder"),
-                    RecipeOfTheDay.RecipeOptions(id: UUID(), name: "Coconut Milk", picture: "coconut_milk")
-                ],
-                ustensiles: [
-                    RecipeOfTheDay.RecipeOptions(id: UUID(), name: "Pot", picture: "pot"),
-                    RecipeOfTheDay.RecipeOptions(id: UUID(), name: "Spoon", picture: "spoon")
-                ],
-                steps: [
-                    "Cut the chicken breast into cubes.",
-                    "In a pot, cook the chicken with curry powder until browned.",
-                    "Add the coconut milk and simmer for 20 minutes.",
-                    "Serve hot with rice."
-                ]),
-            RecipeOfTheDay(
-                id: UUID(),
-                name: "Pancakes",
-                image: "pancakes.jpg",
-                ingredients: [
-                    RecipeOfTheDay.RecipeOptions(id: UUID(), name: "Flour", picture: "flour"),
-                    RecipeOfTheDay.RecipeOptions(id: UUID(), name: "Eggs", picture: "eggs"),
-                    RecipeOfTheDay.RecipeOptions(id: UUID(), name: "Milk", picture: "milk")
-                ],
-                ustensiles: [
-                    RecipeOfTheDay.RecipeOptions(id: UUID(), name: "Bowl", picture: "bowl"),
-                    RecipeOfTheDay.RecipeOptions(id: UUID(), name: "Pan", picture: "pan")
-                ],
-                steps: [
-                    "In a bowl, mix together the flour, eggs, and milk.",
-                    "Heat a pan over medium heat and pour in some of the batter.",
-                    "Cook until bubbles form on the surface, then flip and cook until golden brown.",
-                    "Serve with maple syrup and butter."
-                ])
-        ]
+        URLSession.shared.dataTask(with: request) { data, _, _ in
+            if let data = data {
+                do {
+                    let response = try JSONDecoder().decode(Recipe.self, from: data)
+                    print(response)
+                    DispatchQueue.main.async {
+                        self.recipe = response
+                    }
+                } catch {
+                    print("C'est une erreur")
+                    print("Error: \(error)")
+                }
+            }
+        }.resume()
     }
 }
 
-class RecipeOfTheDayDataManager: ObservableObject {
-    @Published var recipeOfTheDay = RecipeOfTheDay.example()
-}
-
-class UserRecipesDataManager: ObservableObject {
-    @Published var userRecipes = RecipeOfTheDay.examples()
-}
-
-class RecipeOfTheDayFlow: ObservableObject {
-    static let shared = RecipeOfTheDayFlow()
+class RecipeFlow: ObservableObject {
+    static let shared = RecipeFlow()
 
     @Published var path = NavigationPath()
 

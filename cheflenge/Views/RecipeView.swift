@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct RecipeView: View {
-    @EnvironmentObject var recipeOfTheDay: RecipeOfTheDayDataManager
-    @EnvironmentObject var recipeOfTheDayFlow: RecipeOfTheDayFlow
+    @EnvironmentObject var recipeOfTheDayModel: RecipeOfTheDayModel
+    @EnvironmentObject var recipeFlow: RecipeFlow
 
     var numberOfRectangle = 5
 
@@ -17,19 +17,24 @@ struct RecipeView: View {
         ScrollView {
             PageWrapperView {
                 TitleView(text: "DÉFI DU JOUR")
-                SubTitleView(text: recipeOfTheDay.recipeOfTheDay.name)
-                Rectangle().fill(Color.white)
-                    .cornerRadius(30)
-                    .frame(height: 116)
-                    .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 3)
+                SubTitleView(text: recipeOfTheDayModel.recipe.title)
+                AsyncImage(url: URL(string: "\(API.BASE_URL)\(recipeOfTheDayModel.recipe.image?.url ?? "")"), content: { image in
+                    image.resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .clipped()
+                        .frame(height: 116)
+                        .cornerRadius(30)
+                        .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 3)
+                },
+                placeholder: { ProgressView() })
             }
 
             VStack(spacing: 32, content: {
-                ScrollElementsView(subTitle: "Ingrédients", recipeOptions: recipeOfTheDay.recipeOfTheDay.ingredients)
-                ScrollElementsView(subTitle: "Ustensiles", recipeOptions: recipeOfTheDay.recipeOfTheDay.ustensiles)
+                ScrollElementsView(subTitle: "Ingrédients", recipeOptions: recipeOfTheDayModel.recipe.ingredients)
+                ScrollElementsView(subTitle: "Ustensiles", recipeOptions: recipeOfTheDayModel.recipe.utensils)
             })
             PageWrapperView {
-                ForEach(Array(recipeOfTheDay.recipeOfTheDay.steps.enumerated()), id: \.element) { index, step in
+                ForEach(Array(recipeOfTheDayModel.recipe.preparationStage.enumerated()), id: \.element) { index, step in
                     VStack {
                         HStack(alignment: .top) {
                             Text("\(index + 1).")
@@ -53,7 +58,7 @@ struct RecipeView: View {
 
 struct ScrollElementsView: View {
     var subTitle: String = "Subtitle"
-    var recipeOptions: [RecipeOfTheDay.RecipeOptions] = []
+    var recipeOptions: [Recipe.RecipeOptions] = []
 
     var body: some View {
         VStack {
@@ -64,14 +69,15 @@ struct ScrollElementsView: View {
                 HStack(spacing: 16) {
                     ForEach(recipeOptions, id: \.self) { recipeOption in
                         VStack {
-                            ZStack {
-                                Color(Color.white)
-
-                                Text(recipeOption.picture + ".jpg")
-                            }
-                            .cornerRadius(30)
-                            .frame(width: 150, height: 150)
-                            .shadow(radius: 3)
+                            AsyncImage(url: URL(string: "\(API.BASE_URL)\(recipeOption.photo?.url ?? "")"), content: { image in
+                                image.resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .clipped()
+                                    .frame(width: 150, height: 150)
+                                    .cornerRadius(30)
+                                    .shadow(radius: 3)
+                            },
+                            placeholder: { ProgressView() })
 
                             Text(recipeOption.name).underline()
                         }
@@ -86,6 +92,6 @@ struct ScrollElementsView: View {
 
 #Preview {
     RecipeView()
-        .environmentObject(RecipeOfTheDayDataManager())
-        .environmentObject(RecipeOfTheDayFlow())
+        .environmentObject(RecipeOfTheDayModel())
+        .environmentObject(RecipeFlow())
 }
