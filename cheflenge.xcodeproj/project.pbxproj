@@ -35,7 +35,7 @@
 		CEEBB8C12B96933B000BF885 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = CEEBB8C02B96933B000BF885 /* .gitignore */; };
 		CEFF1A0F2BBA405B00805862 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A0D2BBA405B00805862 /* ContentView.swift */; };
 		CEFF1A102BBA405B00805862 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A0E2BBA405B00805862 /* HomeView.swift */; };
-		CEFF1A162BBA423600805862 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A152BBA423600805862 /* Recipe.swift */; };
+		CEFF1A162BBA423600805862 /* RecipeNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A152BBA423600805862 /* RecipeNetwork.swift */; };
 		CEFF1A1B2BBA44CB00805862 /* StrapiPicturesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A1A2BBA44CB00805862 /* StrapiPicturesModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,7 +69,7 @@
 		CEEBB8C02B96933B000BF885 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		CEFF1A0D2BBA405B00805862 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CEFF1A0E2BBA405B00805862 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		CEFF1A152BBA423600805862 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		CEFF1A152BBA423600805862 /* RecipeNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeNetwork.swift; sourceTree = "<group>"; };
 		CEFF1A1A2BBA44CB00805862 /* StrapiPicturesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrapiPicturesModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -188,7 +188,7 @@
 		CEFF1A172BBA42D400805862 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				CEFF1A152BBA423600805862 /* Recipe.swift */,
+				CEFF1A152BBA423600805862 /* RecipeNetwork.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -266,7 +266,7 @@
 			files = (
 				CE9EEFB32BB9A17B00C60C69 /* API.swift in Sources */,
 				CEFF1A1B2BBA44CB00805862 /* StrapiPicturesModel.swift in Sources */,
-				CEFF1A162BBA423600805862 /* Recipe.swift in Sources */,
+				CEFF1A162BBA423600805862 /* RecipeNetwork.swift in Sources */,
 				CEA9E6E82BA451E4007377E8 /* PhotoCollectionView.swift in Sources */,
 				CEFF1A0F2BBA405B00805862 /* ContentView.swift in Sources */,
 				CEFF1A102BBA405B00805862 /* HomeView.swift in Sources */,

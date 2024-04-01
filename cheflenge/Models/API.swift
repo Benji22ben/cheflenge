@@ -14,5 +14,6 @@ enum API {
     enum Paths {
         static let recipeOfTheDay: String = "api/get/recipeOfTheDay"
         static let recipes: String = "api/get/recipes"
+        static let toggleFavorite: String = "api/favorite-recipe/toggle"
     }
 }
