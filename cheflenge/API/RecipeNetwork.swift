@@ -55,4 +55,11 @@ class RecipesNetwork: ObservableObject {
             }
         }.resume()
     }
+    
+    func toggleFavorite(for recipe: Recipe) {
+        if let index = recipes.firstIndex(where: { $0.id == recipe.id }) {
+            recipes[index].favorite?.toggle()
+            // Vous pouvez ajouter ici la logique pour mettre à jour les favoris côté serveur si nécessaire
+        }
+    }
 }

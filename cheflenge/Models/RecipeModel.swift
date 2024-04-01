@@ -29,5 +29,5 @@ struct Recipe: Identifiable, Decodable {
     let createdAt: String
     let updatedAt: String
     let publishedAt: String
-    let favorite: Bool?
+    var favorite: Bool?
 }
