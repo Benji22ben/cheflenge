@@ -7,22 +7,6 @@
 
 import SwiftUI
 
-// class CustomGridItem: Identifiable, ObservableObject {
-//    var id = UUID()
-//    var height: CGFloat = CGFloat.random(in: 150...400)
-//    var imgString: String
-//    var title: String
-//    var creationDate: Date
-//    @Published var favorite: Bool
-//
-//    init(imgString: String, title: String, creationDate: Date, favorite: Bool = false) {
-//        self.imgString = imgString
-//        self.title = title
-//        self.creationDate = creationDate
-//        self.favorite = favorite
-//    }
-// }
-
 struct GridTable: View {
     var recipesNetwork: RecipesNetwork
     
@@ -91,16 +75,12 @@ struct CustomGridItemView: View {
     var body: some View {
         ZStack(alignment: .bottomLeading) {
             GeometryReader { reader in
-
                 AsyncImage(url: URL(string: "\(API.BASE_URL)\(gridItem.image?.url ?? "")"), content: { image in
                     image
                         .resizable()
                         .scaledToFill()
-                        .frame(width: reader.size.width,
-                               height: reader.size.height,
-                               alignment: .center)
-                },
-                placeholder: { ProgressView() })
+                        .frame(width: reader.size.width, height: reader.size.height, alignment: .center)
+                }, placeholder: { ProgressView() })
             }
             VStack(alignment: .leading, spacing: 0) {
                 // Bouton de favoris
@@ -132,6 +112,7 @@ struct CustomGridItemView: View {
         .clipShape(RoundedRectangle(cornerRadius: 13))
     }
 }
+
 
 
 #Preview {

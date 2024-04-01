@@ -54,6 +54,7 @@ struct GalleryView: View {
                     Spacer()
                 }
             }
+            
             ScrollView {
                 GridTable(gridItems: filteredRecipes, numOfColumns: 2, recipesNetwork: recipesNetwork)
             }
