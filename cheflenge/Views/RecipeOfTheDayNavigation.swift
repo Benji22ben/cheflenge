@@ -1,11 +1,12 @@
 //
-//  StrapiPictures.swift
+//  RecipeNavigation.swift
 //  cheflenge
 //
-//  Created by Benjamin MARQUES on 01/04/2024.
+//  Created by Benjamin MARQUES on 15/03/2024.
 //
 
 import Foundation
+import SwiftUI
 
 struct StrapiPictures: Identifiable, Decodable, Equatable, Hashable {
     struct Format: Decodable, Equatable, Hashable {
@@ -123,5 +124,64 @@ struct StrapiPictures: Identifiable, Decodable, Equatable, Hashable {
         hasher.combine(folderPath)
         hasher.combine(createdAt)
         hasher.combine(updatedAt)
+    }
+}
+
+struct Recipe: Identifiable, Decodable {
+    struct RecipeOptions: Identifiable, Hashable, Decodable {
+        let id: Int
+        let name: String
+        let photo: StrapiPictures?
+        let createdAt: String
+        let updatedAt: String
+        let publishedAt: String
+    }
+
+    let id: Int
+    let title: String
+    let image: StrapiPictures?
+    let preparationStage: [String]
+    let isEvent: Bool?
+    let endEvent: String
+    let ingredients: [RecipeOptions]
+    let utensils: [RecipeOptions]
+    let createdAt: String
+    let updatedAt: String
+    let publishedAt: String
+}
+
+class RecipeOfTheDayModel: ObservableObject {
+    @Published var recipe = Recipe(id: 1, title: "", image: nil, preparationStage: [], isEvent: false, endEvent: "", ingredients: [], utensils: [], createdAt: "", updatedAt: "", publishedAt: "")
+    func fetchRecipeOfTheDay() {
+        let url = API.BASE_URL.appendingPathComponent("/\(API.Paths.recipeOfTheDay)")
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzExOTA4MDIyLCJleHAiOjE3MTQ1MDAwMjJ9.YjXYh8n-PmnWdwIEeeGaITcJtHmnTkpZEVvVYm9ETcE", forHTTPHeaderField: "Authorization")
+
+        URLSession.shared.dataTask(with: request) { data, _, _ in
+            if let data = data {
+                do {
+                    let response = try JSONDecoder().decode(Recipe.self, from: data)
+                    print(response)
+                    DispatchQueue.main.async {
+                        self.recipe = response
+                    }
+                } catch {
+                    print("C'est une erreur")
+                    print("Error: \(error)")
+                }
+            }
+        }.resume()
+    }
+}
+
+class RecipeFlow: ObservableObject {
+    static let shared = RecipeFlow()
+
+    @Published var path = NavigationPath()
+
+    func navigateBackToRoot() {
+        path.removeLast(path.count)
     }
 }

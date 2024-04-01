@@ -10,7 +10,7 @@ import os.log
 import SwiftUI
 
 struct CameraView: View {
-    @StateObject private var model = CameraModel()
+    @StateObject private var model = PicturesModel()
 
     private static let barHeightFactor = 0.15
 

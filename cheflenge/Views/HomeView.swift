@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject var recipeOfTheDayModel = RecipeOfTheDayModel()
-    @StateObject var recipeOfTheDayFlow = RecipeOfTheDayFlow()
+    @StateObject var recipeFlow = RecipeFlow()
 
     var body: some View {
         NavigationStack(path: $recipeFlow.path) {
@@ -25,7 +25,7 @@ struct HomeView: View {
             print(recipeOfTheDayModel.recipe)
         }
         .environmentObject(recipeOfTheDayModel)
-        .environmentObject(recipeOfTheDayFlow)
+        .environmentObject(recipeFlow)
     }
 }
 
