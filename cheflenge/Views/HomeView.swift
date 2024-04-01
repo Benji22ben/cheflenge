@@ -22,7 +22,6 @@ struct HomeView: View {
         .onAppear {
             recipeOfTheDay.fetchRecipeOfTheDay()
         }
-        .environmentObject(recipeOfTheDay)
     }
 }
 

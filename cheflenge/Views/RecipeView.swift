@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RecipeView: View {
-    @EnvironmentObject var recipeOfTheDay: RecipeOfTheDayNetworkManager
+    @StateObject var recipeOfTheDay = RecipeOfTheDayNetworkManager()
 
     var numberOfRectangle = 5
 
@@ -51,6 +51,8 @@ struct RecipeView: View {
                     .cornerRadius(10)
                     .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 3)
             }
+        }.onAppear {
+            recipeOfTheDay.fetchRecipeOfTheDay()
         }
     }
 }
