@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RecipeView: View {
     @EnvironmentObject var recipeOfTheDayModel: RecipeOfTheDayModel
-    @EnvironmentObject var recipeFlow: RecipeFlow
+    @EnvironmentObject var recipeOfTheDayFlow: RecipeOfTheDayFlow
 
     var numberOfRectangle = 5
 
@@ -93,5 +93,5 @@ struct ScrollElementsView: View {
 #Preview {
     RecipeView()
         .environmentObject(RecipeOfTheDayModel())
-        .environmentObject(RecipeFlow())
+        .environmentObject(RecipeOfTheDayFlow())
 }

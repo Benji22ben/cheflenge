@@ -6,7 +6,7 @@ import AVFoundation
 import os.log
 import SwiftUI
 
-final class PicturesModel: ObservableObject {
+final class CameraModel: ObservableObject {
     let camera = Camera()
     let photoCollection = PhotoCollection(smartAlbum: .smartAlbumUserLibrary)
     
