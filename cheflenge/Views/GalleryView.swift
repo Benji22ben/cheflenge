@@ -12,27 +12,24 @@ struct GalleryView: View {
     @State private var showFavoritesOnly = false
     @StateObject var recipesNetwork = RecipesNetwork()
 
-//    // Tri sur la date
-//    var sortedCustomGridItems: [Recipe] {
-//        return recipes.sorted(by: { $0.createdAt > $1.createdAt })
-//    }
-//
-//    // Tri sur la recherche et la sélection des favoris
-//    var filteredCustomGridItems: [Recipe] {
-//        if searchText.isEmpty {
-//            if showFavoritesOnly {
-//                return sortedCustomGridItems.filter { $0.favorite ?? false }
-//            } else {
-//                return sortedCustomGridItems
-//            }
-//        } else {
-//            if showFavoritesOnly {
-//                return sortedCustomGridItems.filter { $0.title.localizedCaseInsensitiveContains(searchText) && ($0.favorite != nil) }
-//            } else {
-//                return sortedCustomGridItems.filter { $0.title.localizedCaseInsensitiveContains(searchText) }
-//            }
-//        }
-//    }
+    var filteredRecipes: [Recipe] {
+        var filtered = recipesNetwork.recipes
+
+        // Filtrer par favoris
+        if showFavoritesOnly {
+            filtered = filtered.filter { $0.favorite ?? false }
+        }
+
+        // Filtrer par recherche
+        if !searchText.isEmpty {
+            filtered = filtered.filter { $0.title.localizedCaseInsensitiveContains(searchText) }
+        }
+
+        // Trier par date (le plus récent d'abord)
+        filtered.sort { $0.createdAt > $1.createdAt }
+
+        return filtered
+    }
 
     var body: some View {
         PageWrapperView {
@@ -57,8 +54,9 @@ struct GalleryView: View {
                     Spacer()
                 }
             }
+            
             ScrollView {
-                GridTable(gridItems: recipesNetwork.recipes, numOfColumns: 2)
+                GridTable(gridItems: filteredRecipes, numOfColumns: 2, recipesNetwork: recipesNetwork)
             }
         }.onAppear {
             recipesNetwork.fetchRecipes()
@@ -68,6 +66,7 @@ struct GalleryView: View {
         }
     }
 }
+
 
 #Preview {
     GalleryView()

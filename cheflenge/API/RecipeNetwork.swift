@@ -95,7 +95,15 @@ class RecipesNetwork: ObservableObject {
         URLSession.shared.dataTask(with: request) { data, _, _ in
             if let data = data {
                 do {
-                    let response = try JSONDecoder().decode([Recipe].self, from: data)
+                    var response = try JSONDecoder().decode([Recipe].self, from: data)
+                    
+                    // Initialize favorite to false for each recipe
+                    response = response.map { recipe in
+                        var updatedRecipe = recipe
+                        updatedRecipe.favorite = false
+                        return updatedRecipe
+                    }
+                    
                     DispatchQueue.main.async {
                         self.recipes = response
                     }
@@ -104,5 +112,11 @@ class RecipesNetwork: ObservableObject {
                 }
             }
         }.resume()
+    }
+    
+    func toggleFavorite(for recipe: Recipe) {
+        if let index = recipes.firstIndex(where: { $0.id == recipe.id }) {
+            recipes[index].favorite?.toggle()
+        }
     }
 }
