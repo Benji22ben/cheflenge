@@ -105,7 +105,6 @@ class Camera: NSObject {
         captureDevice = availableCaptureDevices.first ?? AVCaptureDevice.default(for: .video)
         
         UIDevice.current.beginGeneratingDeviceOrientationNotifications()
-        NotificationCenter.default.addObserver(self, selector: #selector(updateForDeviceOrientation), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
     private func configureCaptureSession(completionHandler: (_ success: Bool) -> Void) {
@@ -274,11 +273,6 @@ class Camera: NSObject {
             orientation = UIScreen.main.orientation
         }
         return orientation
-    }
-    
-    @objc
-    func updateForDeviceOrientation() {
-        // TODO: Figure out if we need this for anything.
     }
     
     private func videoOrientationFor(_ deviceOrientation: UIDeviceOrientation) -> AVCaptureVideoOrientation? {

@@ -15,5 +15,6 @@ enum API {
         static let recipeOfTheDay: String = "api/get/recipeOfTheDay"
         static let recipes: String = "api/get/recipes"
         static let toggleFavorite: String = "api/favorite-recipe/toggle"
+        static let uploadPictureForRecipe: String = "api/user-picture-for-recipe/upload"
     }
 }

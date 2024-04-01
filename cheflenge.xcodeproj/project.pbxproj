@@ -37,6 +37,8 @@
 		CEFF1A102BBA405B00805862 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A0E2BBA405B00805862 /* HomeView.swift */; };
 		CEFF1A162BBA423600805862 /* RecipeNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A152BBA423600805862 /* RecipeNetwork.swift */; };
 		CEFF1A1B2BBA44CB00805862 /* StrapiPicturesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A1A2BBA44CB00805862 /* StrapiPicturesModel.swift */; };
+		CEFF1A1D2BBB306B00805862 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A1C2BBB306B00805862 /* Media.swift */; };
+		CEFF1A1F2BBB549E00805862 /* ImageFromCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A1E2BBB549E00805862 /* ImageFromCameraView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +73,8 @@
 		CEFF1A0E2BBA405B00805862 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		CEFF1A152BBA423600805862 /* RecipeNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeNetwork.swift; sourceTree = "<group>"; };
 		CEFF1A1A2BBA44CB00805862 /* StrapiPicturesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrapiPicturesModel.swift; sourceTree = "<group>"; };
+		CEFF1A1C2BBB306B00805862 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
+		CEFF1A1E2BBB549E00805862 /* ImageFromCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFromCameraView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +135,7 @@
 				CEFF1A122BBA415100805862 /* Camera */,
 				CEFF1A112BBA413900805862 /* ImagePicker */,
 				CE9EEFB22BB9A17B00C60C69 /* API.swift */,
+				CEFF1A1C2BBB306B00805862 /* Media.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -148,6 +153,7 @@
 				CEA9E6E12BA4510F007377E8 /* PhotoItemView.swift */,
 				CEA9E6E52BA45170007377E8 /* PhotoView.swift */,
 				CEA9E6E72BA451E4007377E8 /* PhotoCollectionView.swift */,
+				CEFF1A1E2BBB549E00805862 /* ImageFromCameraView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -266,6 +272,7 @@
 			files = (
 				CE9EEFB32BB9A17B00C60C69 /* API.swift in Sources */,
 				CEFF1A1B2BBA44CB00805862 /* StrapiPicturesModel.swift in Sources */,
+				CEFF1A1D2BBB306B00805862 /* Media.swift in Sources */,
 				CEFF1A162BBA423600805862 /* RecipeNetwork.swift in Sources */,
 				CEA9E6E82BA451E4007377E8 /* PhotoCollectionView.swift in Sources */,
 				CEFF1A0F2BBA405B00805862 /* ContentView.swift in Sources */,
@@ -287,6 +294,7 @@
 				BB9552F52BA3275600360CB4 /* GalleryView.swift in Sources */,
 				CEA9E6E22BA4510F007377E8 /* PhotoItemView.swift in Sources */,
 				CEA9E6D82BA44CB4007377E8 /* PhotoAsset.swift in Sources */,
+				CEFF1A1F2BBB549E00805862 /* ImageFromCameraView.swift in Sources */,
 				CEA9E6DC2BA44E13007377E8 /* PhotoAssetCollection.swift in Sources */,
 				CEA9E6E02BA45083007377E8 /* ViewfinderView.swift in Sources */,
 				CEA9E6CE2BA347C9007377E8 /* CameraView.swift in Sources */,

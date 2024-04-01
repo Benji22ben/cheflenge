@@ -68,7 +68,7 @@ final class CameraModel: ObservableObject {
     func savePhoto(imageData: Data) {
         Task {
             do {
-                try await photoCollection.addImage(imageData)
+//                try await photoCollection.addImage(imageData)
                 logger.debug("Added image data to photo collection.")
             } catch {
                 logger.error("Failed to add image to photo collection: \(error.localizedDescription)")

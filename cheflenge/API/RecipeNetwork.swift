@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class RecipeOfTheDayNetworkManager: ObservableObject {
     @Published var recipe = Recipe(id: 1, title: "", image: nil, preparationStage: [], isEvent: false, endEvent: "", ingredients: [], utensils: [], createdAt: "", updatedAt: "", publishedAt: "", favorite: false)
@@ -29,6 +30,55 @@ class RecipeOfTheDayNetworkManager: ObservableObject {
                 }
             }
         }.resume()
+    }
+
+    func postRecipeOfTheDayPicture(imageData: Data, recipeName: String, recipeId: Int, completion: @escaping (Result<String, Error>) -> Void) {
+        let url = API.BASE_URL.appendingPathComponent("/\(API.Paths.uploadPictureForRecipe)")
+        var request = URLRequest(url: url)
+        var imageFromData = UIImage(data: imageData)
+
+        request.httpMethod = "POST" // create boundary
+        request.setValue("Bearer \(API.JWT)", forHTTPHeaderField: "Authorization")
+
+        let boundary = "Boundary-\(UUID().uuidString)"
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type") // call createDataBody method
+
+        var body = Data()
+
+        // Add image data
+        body.append("--\(boundary)\r\n".data(using: .utf8)!)
+        body.append("Content-Disposition: form-data; name=\"picture\"; filename=\"\(recipeName).jpg\"\r\n".data(using: .utf8)!)
+        body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
+        body.append(imageData)
+        body.append("\r\n".data(using: .utf8)!)
+        body.append("--\(boundary)--\r\n".data(using: .utf8)!)
+
+        body.append("--\(boundary)\r\n".data(using: .utf8)!)
+        body.append("Content-Disposition: form-data; name=\"recipeId\"\r\n\r\n".data(using: .utf8)!)
+        body.append("\(recipeId)\r\n".data(using: .utf8)!)
+
+        request.httpBody = body
+
+        let task = URLSession.shared.uploadTask(with: request, from: body) { data, response, error in
+            guard let data = data, let response = response as? HTTPURLResponse, error == nil else {
+                completion(.failure(error!))
+                return
+            }
+
+            guard response.statusCode == 200 else {
+                completion(.failure(NSError(domain: "", code: response.statusCode, userInfo: nil)))
+                return
+            }
+
+            do {
+                let result = try JSONDecoder().decode(String.self, from: data)
+                completion(.success(result))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+
+        task.resume()
     }
 }
 
