@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct RecipeView: View {
-    @EnvironmentObject var recipeOfTheDayModel: RecipeOfTheDayModel
-    @EnvironmentObject var recipeFlow: RecipeFlow
+    @EnvironmentObject var recipeOfTheDay: RecipeOfTheDayNetworkManager
 
     var numberOfRectangle = 5
 
@@ -17,8 +16,8 @@ struct RecipeView: View {
         ScrollView {
             PageWrapperView {
                 TitleView(text: "DÉFI DU JOUR")
-                SubTitleView(text: recipeOfTheDayModel.recipe.title)
-                AsyncImage(url: URL(string: "\(API.BASE_URL)\(recipeOfTheDayModel.recipe.image?.url ?? "")"), content: { image in
+                SubTitleView(text: recipeOfTheDay.recipe.title)
+                AsyncImage(url: URL(string: "\(API.BASE_URL)\(recipeOfTheDay.recipe.image?.url ?? "")"), content: { image in
                     image.resizable()
                         .aspectRatio(contentMode: .fill)
                         .clipped()
@@ -30,11 +29,11 @@ struct RecipeView: View {
             }
 
             VStack(spacing: 32, content: {
-                ScrollElementsView(subTitle: "Ingrédients", recipeOptions: recipeOfTheDayModel.recipe.ingredients)
-                ScrollElementsView(subTitle: "Ustensiles", recipeOptions: recipeOfTheDayModel.recipe.utensils)
+                ScrollElementsView(subTitle: "Ingrédients", recipeOptions: recipeOfTheDay.recipe.ingredients)
+                ScrollElementsView(subTitle: "Ustensiles", recipeOptions: recipeOfTheDay.recipe.utensils)
             })
             PageWrapperView {
-                ForEach(Array(recipeOfTheDayModel.recipe.preparationStage.enumerated()), id: \.element) { index, step in
+                ForEach(Array(recipeOfTheDay.recipe.preparationStage.enumerated()), id: \.element) { index, step in
                     VStack {
                         HStack(alignment: .top) {
                             Text("\(index + 1).")
@@ -92,6 +91,5 @@ struct ScrollElementsView: View {
 
 #Preview {
     RecipeView()
-        .environmentObject(RecipeOfTheDayModel())
-        .environmentObject(RecipeFlow())
+        .environmentObject(RecipeOfTheDayNetworkManager())
 }

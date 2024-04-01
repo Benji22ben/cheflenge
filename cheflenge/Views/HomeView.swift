@@ -8,24 +8,22 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject var recipeOfTheDayModel = RecipeOfTheDayModel()
-    @StateObject var recipeFlow = RecipeFlow()
+    @StateObject var recipeOfTheDay = RecipeOfTheDayNetworkManager()
 
     var body: some View {
-        NavigationStack(path: $recipeFlow.path) {
+        NavigationStack {
             PageWrapperView {
                 TitleView(text: "CHEF'LENGE")
-                TodayRecipeView(imageOfRecipe: recipeOfTheDayModel.recipe.image?.url ?? "")
-                TimeBlockView(dateFromAPI: recipeOfTheDayModel.recipe.endEvent)
+                TodayRecipeView(imageOfRecipe: recipeOfTheDay.recipe.image?.url ?? "")
+                TimeBlockView(dateFromAPI: recipeOfTheDay.recipe.endEvent)
             }
             Spacer()
         }
         .onAppear {
-            recipeOfTheDayModel.fetchRecipeOfTheDay()
-            print(recipeOfTheDayModel.recipe)
+            recipeOfTheDay.fetchRecipeOfTheDay()
+            print(recipeOfTheDay.recipe)
         }
-        .environmentObject(recipeOfTheDayModel)
-        .environmentObject(recipeFlow)
+        .environmentObject(recipeOfTheDay)
     }
 }
 
