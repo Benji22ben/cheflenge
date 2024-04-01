@@ -15,13 +15,12 @@ struct HomeView: View {
             PageWrapperView {
                 TitleView(text: "CHEF'LENGE")
                 TodayRecipeView(imageOfRecipe: recipeOfTheDay.recipe.image?.url ?? "")
-                TimeBlockView(dateFromAPI: recipeOfTheDay.recipe.endEvent)
+                TimeBlockView(dateFromAPI: recipeOfTheDay.recipe.endEvent ?? "2024-01-01T00:00:00.000Z")
             }
             Spacer()
         }
         .onAppear {
             recipeOfTheDay.fetchRecipeOfTheDay()
-            print(recipeOfTheDay.recipe)
         }
         .environmentObject(recipeOfTheDay)
     }

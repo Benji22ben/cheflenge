@@ -23,10 +23,11 @@ struct Recipe: Identifiable, Decodable {
     let image: StrapiPictures?
     let preparationStage: [String]
     let isEvent: Bool?
-    let endEvent: String
+    let endEvent: String?
     let ingredients: [RecipeOptions]
     let utensils: [RecipeOptions]
     let createdAt: String
     let updatedAt: String
     let publishedAt: String
+    let favorite: Bool?
 }

@@ -7,47 +7,38 @@
 
 import SwiftUI
 
-var gridItems: [CustomGridItem] = [
-    CustomGridItem(imgString: "spaghetti", title: "Spaghetti bolognese", creationDate: Calendar.current.date(from: DateComponents(year: 2023, month: 8, day: 14)) ?? Date(), favorite: true),
-    CustomGridItem(imgString: "salad", title: "Salade César", creationDate: Calendar.current.date(from: DateComponents(year: 2023, month: 4, day: 7)) ?? Date()),
-    CustomGridItem(imgString: "pizza", title: "Pizza Margherita", creationDate: Calendar.current.date(from: DateComponents(year: 2023, month: 9, day: 18)) ?? Date(), favorite: true),
-    CustomGridItem(imgString: "cake", title: "Gâteau au chocolat", creationDate: Calendar.current.date(from: DateComponents(year: 2024, month: 2, day: 2)) ?? Date(), favorite: true),
-    CustomGridItem(imgString: "muffin", title: "Muffin au chocolat", creationDate: Calendar.current.date(from: DateComponents(year: 2024, month: 2, day: 5)) ?? Date()),
-    CustomGridItem(imgString: "lasagna", title: "Lasagne", creationDate: Calendar.current.date(from: DateComponents(year: 2024, month: 1, day: 1)) ?? Date())
-]
-
 struct GalleryView: View {
     @State private var searchText = ""
     @State private var showFavoritesOnly = false
-    
-    //Tri sur la date
-    var sortedCustomGridItems: [CustomGridItem] {
-            return gridItems.sorted(by: { $0.creationDate > $1.creationDate })
-        }
-    
-    //Tri sur la recherche et la sélection des favoris
-        var filteredCustomGridItems: [CustomGridItem] {
-            if searchText.isEmpty {
-                if showFavoritesOnly {
-                    return sortedCustomGridItems.filter { $0.favorite }
-                } else {
-                    return sortedCustomGridItems
-                }
-            } else {
-                if showFavoritesOnly {
-                    return sortedCustomGridItems.filter { $0.title.localizedCaseInsensitiveContains(searchText) && $0.favorite }
-                } else {
-                    return sortedCustomGridItems.filter { $0.title.localizedCaseInsensitiveContains(searchText) }
-                }
-            }
-        }
-    
+    @StateObject var recipesNetwork = RecipesNetwork()
+
+//    // Tri sur la date
+//    var sortedCustomGridItems: [Recipe] {
+//        return recipes.sorted(by: { $0.createdAt > $1.createdAt })
+//    }
+//
+//    // Tri sur la recherche et la sélection des favoris
+//    var filteredCustomGridItems: [Recipe] {
+//        if searchText.isEmpty {
+//            if showFavoritesOnly {
+//                return sortedCustomGridItems.filter { $0.favorite ?? false }
+//            } else {
+//                return sortedCustomGridItems
+//            }
+//        } else {
+//            if showFavoritesOnly {
+//                return sortedCustomGridItems.filter { $0.title.localizedCaseInsensitiveContains(searchText) && ($0.favorite != nil) }
+//            } else {
+//                return sortedCustomGridItems.filter { $0.title.localizedCaseInsensitiveContains(searchText) }
+//            }
+//        }
+//    }
+
     var body: some View {
         PageWrapperView {
             VStack(spacing: 10) {
                 SearchBar(text: $searchText)
-                
-                
+
                 HStack {
                     Button(action: {
                         showFavoritesOnly.toggle()
@@ -66,16 +57,18 @@ struct GalleryView: View {
                     Spacer()
                 }
             }
-            
             ScrollView {
-                GridTable(gridItems: filteredCustomGridItems, numOfColumns: 2)
+                GridTable(gridItems: recipesNetwork.recipes, numOfColumns: 2)
             }
+        }.onAppear {
+            recipesNetwork.fetchRecipes()
         }
-        
+        .refreshable {
+            recipesNetwork.fetchRecipes()
+        }
     }
 }
 
 #Preview {
     GalleryView()
 }
-
