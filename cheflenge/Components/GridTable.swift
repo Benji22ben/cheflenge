@@ -25,44 +25,45 @@ import SwiftUI
 
 struct GridTable: View {
     struct Column: Identifiable {
-        let id = UUID()
-        var gridItems: [Recipe]
-    }
-
-    var columns: [Column]
-
-    let spacing: CGFloat
-    let horizontalPadding: CGFloat
-
-    init(gridItems: [Recipe], numOfColumns: Int, spacing: CGFloat = 20, horizontalPadding: CGFloat = 0) {
-        self.spacing = spacing
-        self.horizontalPadding = horizontalPadding
-
-        var columns = [Column]()
-        for _ in 0 ..< numOfColumns {
-            columns.append(Column(gridItems: gridItems))
+            let id = UUID()
+            var gridItems: [Recipe]
         }
 
-        var columnsHeight = [CGFloat](repeating: 0, count: numOfColumns)
+        var columns: [Column]
 
-        for gridItem in gridItems {
-            var smallestColumnIndex = 0
-            var smallestHeight = columnsHeight.first!
-            for i in 1 ..< columnsHeight.count {
-                let curHeight = columnsHeight[i]
-                if curHeight < smallestHeight {
-                    smallestHeight = curHeight
-                    smallestColumnIndex = i
-                }
+        let spacing: CGFloat
+        let horizontalPadding: CGFloat
+
+        init(gridItems: [Recipe], numOfColumns: Int, spacing: CGFloat = 20, horizontalPadding: CGFloat = 0) {
+            self.spacing = spacing
+            self.horizontalPadding = horizontalPadding
+
+            var columns = [Column]()
+            for _ in 0 ..< numOfColumns {
+                columns.append(Column(gridItems: [])) //
             }
 
-            columns[smallestColumnIndex].gridItems.append(gridItem)
-            columnsHeight[smallestColumnIndex] += CGFloat(gridItem.image?.height ?? Int(CGFloat.random(in: 150 ... 400)))
+            var columnsHeight = [CGFloat](repeating: 0, count: numOfColumns)
+
+            for gridItem in gridItems {
+                var smallestColumnIndex = 0
+                var smallestHeight = columnsHeight.first!
+                for i in 1 ..< columnsHeight.count {
+                    let curHeight = columnsHeight[i]
+                    if curHeight < smallestHeight {
+                        smallestHeight = curHeight
+                        smallestColumnIndex = i
+                    }
+                }
+
+                columns[smallestColumnIndex].gridItems.append(gridItem)
+
+                columnsHeight[smallestColumnIndex] += CGFloat(gridItem.image?.height ?? Int(CGFloat.random(in: 150 ... 400)))
+            }
+
+            self.columns = columns
         }
-
-        self.columns = columns
-    }
-
+    
     var body: some View {
         HStack(alignment: .top, spacing: spacing) {
             ForEach(columns) { column in
