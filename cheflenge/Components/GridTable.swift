@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class GridItem: Identifiable, ObservableObject {
+class CustomGridItem: Identifiable, ObservableObject {
     var id = UUID()
     var height: CGFloat = CGFloat.random(in: 150...400)
     var imgString: String
@@ -28,7 +28,7 @@ struct GridTable: View {
     
     struct Column: Identifiable {
         let id = UUID()
-        var gridItems: [GridItem]
+        var gridItems: [CustomGridItem]
     }
     
     var columns: [Column]
@@ -36,7 +36,7 @@ struct GridTable: View {
     let spacing: CGFloat
     let horizontalPadding: CGFloat
     
-    init(gridItems: [GridItem], numOfColumns: Int, spacing: CGFloat = 20, horizontalPadding: CGFloat = 0) {
+    init(gridItems: [CustomGridItem], numOfColumns: Int, spacing: CGFloat = 20, horizontalPadding: CGFloat = 0) {
         self.spacing = spacing
         self.horizontalPadding = horizontalPadding
         
@@ -71,7 +71,7 @@ struct GridTable: View {
                 LazyVStack(spacing: spacing) {
                     ForEach(column.gridItems.indices, id: \.self) { index in
                         let gridItem = column.gridItems[index]
-                        GridItemView(gridItem: gridItem)
+                        CustomGridItemView(gridItem: gridItem)
                     }
                 }
             }
@@ -80,8 +80,8 @@ struct GridTable: View {
     }
 }
 
-struct GridItemView: View {
-    @StateObject var gridItem: GridItem
+struct CustomGridItemView: View {
+    @StateObject var gridItem: CustomGridItem
     
     var body: some View {
         ZStack(alignment: .bottomLeading) {
