@@ -12,7 +12,7 @@ struct HomeView: View {
     @StateObject var recipeOfTheDayFlow = RecipeOfTheDayFlow()
 
     var body: some View {
-        NavigationStack(path: $recipeOfTheDayFlow.path) {
+        NavigationStack(path: $recipeFlow.path) {
             PageWrapperView {
                 TitleView(text: "CHEF'LENGE")
                 TodayRecipeView(imageOfRecipe: recipeOfTheDayModel.recipe.image?.url ?? "")

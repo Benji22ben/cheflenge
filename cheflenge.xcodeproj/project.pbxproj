@@ -110,6 +110,8 @@
 				CE39AC3F2B966D500016E41A /* Assets.xcassets */,
 				CE39AC3B2B966D4F0016E41A /* cheflengeApp.swift */,
 				CE54F6BB2BBA301100002971 /* ContentView.swift */,
+				CEA9E6F02BA482E5007377E8 /* Recipe.swift */,
+				CE9EEFB22BB9A17B00C60C69 /* API.swift */,
 				CE54F6C92BBA360E00002971 /* Gallery */,
 				CE54F6C22BBA34B800002971 /* RecipeOfTheDay */,
 				CEB83E4C2BA0D49200158775 /* Components */,
@@ -208,8 +210,6 @@
 		CE54F6CB2BBA36D600002971 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				CE9EEFB22BB9A17B00C60C69 /* API.swift */,
-				CEA9E6F02BA482E5007377E8 /* Recipe.swift */,
 				CE54F6CC2BBA36EE00002971 /* StrapiPictures.swift */,
 			);
 			path = Models;
