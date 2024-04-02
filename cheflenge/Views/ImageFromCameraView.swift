@@ -11,16 +11,27 @@ import SwiftUI
 import UIKit
 
 struct ImageFromCameraView: View {
-    @State private var imageData: Data?
+    @State var cgImage: CGImage?
 
     var body: some View {
         VStack {
-            if let imageData = imageData, let uiImage = UIImage(data: imageData) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-            } else {
-                Text("No image captured")
+            ZStack {
+                if let image = cgImage {
+                    Image(cgImage!, scale: 1.0, orientation: .right, label: Text("Coucou"))
+                        .resizable()
+                } else {
+                    Text("No image loaded")
+                }
+                Spacer()
+//                Button(action: {}, label: {
+//                    Text("Envoyer cette image")
+//                        .padding(.horizontal, 30)
+//                        .padding(.vertical, 20)
+//                        .background(Color.accentColor)
+//                        .foregroundColor(Color.white)
+//                        .cornerRadius(10)
+//                        .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 3)
+//                })
             }
         }
     }

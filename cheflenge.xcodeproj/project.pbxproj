@@ -96,12 +96,12 @@
 		CE39AC3A2B966D4F0016E41A /* cheflenge */ = {
 			isa = PBXGroup;
 			children = (
+				CE39AC3B2B966D4F0016E41A /* cheflengeApp.swift */,
 				CEFF1A432BBBDF4700805862 /* Extensions */,
-				CEFF1A402BBBDF1F00805862 /* ViewModels */,
 				CEFF1A392BBBDED100805862 /* Camera */,
+				CEFF1A402BBBDF1F00805862 /* ViewModels */,
 				CEFF1A172BBA42D400805862 /* API */,
 				CEA9E6CF2BA445E8007377E8 /* Models */,
-				CE39AC3B2B966D4F0016E41A /* cheflengeApp.swift */,
 				CEA9E6EF2BA48252007377E8 /* Views */,
 				CE39AC3F2B966D500016E41A /* Assets.xcassets */,
 				CEB83E4C2BA0D49200158775 /* Components */,

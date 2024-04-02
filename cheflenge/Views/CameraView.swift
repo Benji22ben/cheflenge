@@ -46,20 +46,7 @@ struct CameraView: View {
             ErrorView(error: model.error)
         }.sheet(isPresented: $showPicture, content: {
             if let cgImage = model.capturedPhoto {
-                ZStack {
-                    Image(cgImage, scale: 1.0, orientation: .right, label: Text("Coucou"))
-                        .resizable()
-                    Spacer()
-                    Button(action: {}, label: {
-                        Text("Envoyer cette image")
-                            .padding(.horizontal, 30)
-                            .padding(.vertical, 20)
-                            .background(Color.accentColor)
-                            .foregroundColor(Color.white)
-                            .cornerRadius(10)
-                            .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 3)
-                    })
-                }
+                ImageFromCameraView(cgImage: cgImage)
             }
         })
         .onReceive(model.$capturedPhoto) { image in
