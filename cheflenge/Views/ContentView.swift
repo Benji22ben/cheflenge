@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  cheflenge
-//
-//  Created by Benjamin MARQUES on 04/03/2024.
-//
-
 import SwiftUI
 
 struct ContentView: View {

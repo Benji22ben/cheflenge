@@ -1,10 +1,3 @@
-//
-//  GalleryView.swift
-//  cheflenge
-//
-//  Created by Henri Phothinantha on 14/03/2024.
-//
-
 import SwiftUI
 
 struct GalleryView: View {

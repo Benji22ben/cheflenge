@@ -1,10 +1,3 @@
-//
-//  ImageFromCameraView.swift
-//  cheflenge
-//
-//  Created by Benjamin MARQUES on 01/04/2024.
-//
-
 import AVFoundation
 import os.log
 import SwiftUI
