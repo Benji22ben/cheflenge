@@ -21,7 +21,7 @@ struct RecipeView: View {
                     image.resizable()
                         .aspectRatio(contentMode: .fill)
                         .clipped()
-                        .frame(height: 116)
+                        .frame(height: 170)
                         .cornerRadius(30)
                         .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 3)
                 },
@@ -33,6 +33,7 @@ struct RecipeView: View {
                 ScrollElementsView(subTitle: "Ustensiles", recipeOptions: recipeOfTheDay.recipe.utensils)
             })
             PageWrapperView {
+                SubTitleView(text: "Préparation")
                 ForEach(Array(recipeOfTheDay.recipe.preparationStage.enumerated()), id: \.element) { index, step in
                     VStack {
                         HStack(alignment: .top) {
@@ -44,7 +45,7 @@ struct RecipeView: View {
                 }
                 NavigationLink(destination: CameraView(recipeOfTheDay: recipeOfTheDay, recipe: recipeOfTheDay.recipe).toolbar(.hidden, for: .tabBar)) {
                     Text("Valider le défi")
-                }.padding(.horizontal, 30)
+                }.padding(.horizontal, 70)
                     .padding(.vertical, 20)
                     .background(Color.accentColor)
                     .foregroundColor(Color.white)

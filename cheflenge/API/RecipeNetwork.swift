@@ -118,6 +118,33 @@ class RecipesNetwork: ObservableObject {
     func toggleFavorite(for recipe: Recipe) {
         if let index = recipes.firstIndex(where: { $0.id == recipe.id }) {
             recipes[index].favorite?.toggle()
+            
+            // Envoi de la mise à jour de l'état favori à Strapi
+            let url = API.BASE_URL.appendingPathComponent(API.Paths.toggleFavorite)
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.setValue("Bearer \(API.JWT)", forHTTPHeaderField: "Authorization")
+            
+            let parameters: [String: Any] = [
+                "recipeId": recipe.id,
+                "isFavorite": recipes[index].favorite ?? false
+            ]
+            
+            do {
+                request.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: [])
+            } catch {
+                print("Error: \(error)")
+                return
+            }
+            
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    print("Error: \(error)")
+                    return
+                }
+                
+                // Gérer la réponse de Strapi si nécessaire
+            }.resume()
         }
     }
 }
