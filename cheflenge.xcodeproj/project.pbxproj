@@ -26,14 +26,14 @@
 		CEFF1A1B2BBA44CB00805862 /* StrapiPicturesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A1A2BBA44CB00805862 /* StrapiPicturesModel.swift */; };
 		CEFF1A1D2BBB306B00805862 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A1C2BBB306B00805862 /* Media.swift */; };
 		CEFF1A1F2BBB549E00805862 /* ImageFromCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A1E2BBB549E00805862 /* ImageFromCameraView.swift */; };
-		CEFF1A242BBB6D2700805862 /* CameraError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A212BBB6D2700805862 /* CameraError.swift */; };
-		CEFF1A252BBB6D2700805862 /* FrameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A222BBB6D2700805862 /* FrameManager.swift */; };
-		CEFF1A262BBB6D2700805862 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A232BBB6D2700805862 /* CameraManager.swift */; };
-		CEFF1A292BBB6D3600805862 /* CGImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A272BBB6D3600805862 /* CGImageExtension.swift */; };
-		CEFF1A2C2BBB6D5500805862 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A2A2BBB6D5500805862 /* ContentViewModel.swift */; };
-		CEFF1A2E2BBB6DEF00805862 /* FrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A2D2BBB6DEF00805862 /* FrameView.swift */; };
-		CEFF1A302BBB6E3400805862 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A2F2BBB6E3400805862 /* CameraView.swift */; };
-		CEFF1A322BBB704800805862 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A312BBB704800805862 /* ErrorView.swift */; };
+		CEFF1A342BBBDE8400805862 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A332BBBDE8400805862 /* ErrorView.swift */; };
+		CEFF1A362BBBDE9E00805862 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A352BBBDE9E00805862 /* CameraView.swift */; };
+		CEFF1A382BBBDEB900805862 /* FrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A372BBBDEB900805862 /* FrameView.swift */; };
+		CEFF1A3B2BBBDEE500805862 /* CameraError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A3A2BBBDEE500805862 /* CameraError.swift */; };
+		CEFF1A3D2BBBDEF800805862 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A3C2BBBDEF800805862 /* CameraManager.swift */; };
+		CEFF1A3F2BBBDF0A00805862 /* FrameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A3E2BBBDF0A00805862 /* FrameManager.swift */; };
+		CEFF1A422BBBDF2D00805862 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A412BBBDF2D00805862 /* ContentViewModel.swift */; };
+		CEFF1A462BBBDF5700805862 /* CGImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A452BBBDF5700805862 /* CGImageExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,14 +57,14 @@
 		CEFF1A1A2BBA44CB00805862 /* StrapiPicturesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrapiPicturesModel.swift; sourceTree = "<group>"; };
 		CEFF1A1C2BBB306B00805862 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		CEFF1A1E2BBB549E00805862 /* ImageFromCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFromCameraView.swift; sourceTree = "<group>"; };
-		CEFF1A212BBB6D2700805862 /* CameraError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraError.swift; path = ../../../../Downloads/FilterTheWorld/final/FilterTheWorld/Camera/CameraError.swift; sourceTree = "<group>"; };
-		CEFF1A222BBB6D2700805862 /* FrameManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FrameManager.swift; path = ../../../../Downloads/FilterTheWorld/final/FilterTheWorld/Camera/FrameManager.swift; sourceTree = "<group>"; };
-		CEFF1A232BBB6D2700805862 /* CameraManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraManager.swift; path = ../../../../Downloads/FilterTheWorld/final/FilterTheWorld/Camera/CameraManager.swift; sourceTree = "<group>"; };
-		CEFF1A272BBB6D3600805862 /* CGImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGImageExtension.swift; sourceTree = "<group>"; };
-		CEFF1A2A2BBB6D5500805862 /* ContentViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
-		CEFF1A2D2BBB6DEF00805862 /* FrameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FrameView.swift; path = ../../../../Downloads/FilterTheWorld/final/FilterTheWorld/Views/FrameView.swift; sourceTree = "<group>"; };
-		CEFF1A2F2BBB6E3400805862 /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraView.swift; path = ../../../../Downloads/FilterTheWorld/final/FilterTheWorld/Views/CameraView.swift; sourceTree = "<group>"; };
-		CEFF1A312BBB704800805862 /* ErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ErrorView.swift; path = ../../../../Downloads/FilterTheWorld/final/FilterTheWorld/Views/ErrorView.swift; sourceTree = "<group>"; };
+		CEFF1A332BBBDE8400805862 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		CEFF1A352BBBDE9E00805862 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		CEFF1A372BBBDEB900805862 /* FrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameView.swift; sourceTree = "<group>"; };
+		CEFF1A3A2BBBDEE500805862 /* CameraError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraError.swift; sourceTree = "<group>"; };
+		CEFF1A3C2BBBDEF800805862 /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
+		CEFF1A3E2BBBDF0A00805862 /* FrameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameManager.swift; sourceTree = "<group>"; };
+		CEFF1A412BBBDF2D00805862 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
+		CEFF1A452BBBDF5700805862 /* CGImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGImageExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,9 +98,9 @@
 		CE39AC3A2B966D4F0016E41A /* cheflenge */ = {
 			isa = PBXGroup;
 			children = (
-				CEFF1A2B2BBB6D5500805862 /* ViewModels */,
-				CEFF1A282BBB6D3600805862 /* Extensions */,
-				CEFF1A202BBB6D1800805862 /* Camera */,
+				CEFF1A432BBBDF4700805862 /* Extensions */,
+				CEFF1A402BBBDF1F00805862 /* ViewModels */,
+				CEFF1A392BBBDED100805862 /* Camera */,
 				CEFF1A172BBA42D400805862 /* API */,
 				CEA9E6CF2BA445E8007377E8 /* Models */,
 				CE39AC3B2B966D4F0016E41A /* cheflengeApp.swift */,
@@ -134,14 +134,14 @@
 		CEA9E6EF2BA48252007377E8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CEFF1A312BBB704800805862 /* ErrorView.swift */,
-				CEFF1A2F2BBB6E3400805862 /* CameraView.swift */,
-				CEFF1A2D2BBB6DEF00805862 /* FrameView.swift */,
 				BB9552F42BA3275600360CB4 /* GalleryView.swift */,
 				CEFF1A0D2BBA405B00805862 /* ContentView.swift */,
 				CEFF1A0E2BBA405B00805862 /* HomeView.swift */,
 				CEEBB8BE2B9685F8000BF885 /* RecipeView.swift */,
 				CEFF1A1E2BBB549E00805862 /* ImageFromCameraView.swift */,
+				CEFF1A332BBBDE8400805862 /* ErrorView.swift */,
+				CEFF1A352BBBDE9E00805862 /* CameraView.swift */,
+				CEFF1A372BBBDEB900805862 /* FrameView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -166,32 +166,30 @@
 			path = API;
 			sourceTree = "<group>";
 		};
-		CEFF1A202BBB6D1800805862 /* Camera */ = {
+		CEFF1A392BBBDED100805862 /* Camera */ = {
 			isa = PBXGroup;
 			children = (
-				CEFF1A212BBB6D2700805862 /* CameraError.swift */,
-				CEFF1A232BBB6D2700805862 /* CameraManager.swift */,
-				CEFF1A222BBB6D2700805862 /* FrameManager.swift */,
+				CEFF1A3A2BBBDEE500805862 /* CameraError.swift */,
+				CEFF1A3C2BBBDEF800805862 /* CameraManager.swift */,
+				CEFF1A3E2BBBDF0A00805862 /* FrameManager.swift */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
 		};
-		CEFF1A282BBB6D3600805862 /* Extensions */ = {
+		CEFF1A402BBBDF1F00805862 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				CEFF1A272BBB6D3600805862 /* CGImageExtension.swift */,
+				CEFF1A412BBBDF2D00805862 /* ContentViewModel.swift */,
 			);
-			name = Extensions;
-			path = ../../../Downloads/FilterTheWorld/final/FilterTheWorld/Extensions;
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		CEFF1A2B2BBB6D5500805862 /* ViewModels */ = {
+		CEFF1A432BBBDF4700805862 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				CEFF1A2A2BBB6D5500805862 /* ContentViewModel.swift */,
+				CEFF1A452BBBDF5700805862 /* CGImageExtension.swift */,
 			);
-			name = ViewModels;
-			path = ../../../Downloads/FilterTheWorld/final/FilterTheWorld/ViewModels;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,29 +263,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEFF1A342BBBDE8400805862 /* ErrorView.swift in Sources */,
 				CE9EEFB32BB9A17B00C60C69 /* API.swift in Sources */,
 				CEFF1A1B2BBA44CB00805862 /* StrapiPicturesModel.swift in Sources */,
 				CEFF1A1D2BBB306B00805862 /* Media.swift in Sources */,
 				CEFF1A162BBA423600805862 /* RecipeNetwork.swift in Sources */,
 				CEFF1A0F2BBA405B00805862 /* ContentView.swift in Sources */,
-				CEFF1A242BBB6D2700805862 /* CameraError.swift in Sources */,
+				CEFF1A3F2BBBDF0A00805862 /* FrameManager.swift in Sources */,
 				CEFF1A102BBA405B00805862 /* HomeView.swift in Sources */,
-				CEFF1A322BBB704800805862 /* ErrorView.swift in Sources */,
 				BB9552F92BA4424A00360CB4 /* GridTable.swift in Sources */,
+				CEFF1A422BBBDF2D00805862 /* ContentViewModel.swift in Sources */,
 				CEB83E522BA0F1B200158775 /* SubTitleView.swift in Sources */,
+				CEFF1A462BBBDF5700805862 /* CGImageExtension.swift in Sources */,
 				CEB83E542BA0F29900158775 /* PageWrapperView.swift in Sources */,
 				BB9552F72BA33F1E00360CB4 /* SearchBar.swift in Sources */,
 				CEA9E6F12BA482E5007377E8 /* RecipeModel.swift in Sources */,
-				CEFF1A252BBB6D2700805862 /* FrameManager.swift in Sources */,
+				CEFF1A3D2BBBDEF800805862 /* CameraManager.swift in Sources */,
 				CEEBB8BF2B9685F8000BF885 /* RecipeView.swift in Sources */,
-				CEFF1A262BBB6D2700805862 /* CameraManager.swift in Sources */,
-				CEFF1A302BBB6E3400805862 /* CameraView.swift in Sources */,
-				CEFF1A2E2BBB6DEF00805862 /* FrameView.swift in Sources */,
+				CEFF1A3B2BBBDEE500805862 /* CameraError.swift in Sources */,
 				CE39AC3C2B966D4F0016E41A /* cheflengeApp.swift in Sources */,
-				CEFF1A292BBB6D3600805862 /* CGImageExtension.swift in Sources */,
 				CEB83E502BA0DF5E00158775 /* TitleView.swift in Sources */,
-				CEFF1A2C2BBB6D5500805862 /* ContentViewModel.swift in Sources */,
 				BB9552F52BA3275600360CB4 /* GalleryView.swift in Sources */,
+				CEFF1A362BBBDE9E00805862 /* CameraView.swift in Sources */,
+				CEFF1A382BBBDEB900805862 /* FrameView.swift in Sources */,
 				CEFF1A1F2BBB549E00805862 /* ImageFromCameraView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
