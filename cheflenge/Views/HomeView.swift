@@ -68,17 +68,56 @@ struct TodayRecipeView: View {
 struct TimeBlockView: View {
     var dateFromAPI: String = ""
     let dateFormatter = DateFormatter()
-
+    
+    @State var remainingSeconds: Int = 0
+    @State var displaySeconds: String = "--"
+    @State var displayMinutes: String = "--"
+    @State var displayHours: String = "--"
+    
     var remainTime: Date? {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ" // Set the desired date format
         return dateFormatter.date(from: dateFromAPI)
     }
-
+    
+    func manageTime(remainingTime: Date) -> Void {
+        if let remainTime = remainTime {
+            let calendar = Calendar.current
+            let currentDate = Date()
+            let components = calendar.dateComponents([.second], from: currentDate, to: remainTime)
+            remainingSeconds = components.second ?? 0
+            _ = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+                if remainingSeconds > 0 {
+                    remainingSeconds -= 1
+                    displayHours = String(remainingSeconds / 3600)
+                    displayMinutes = String((remainingSeconds % 3600) / 60)
+                    let formatSeconds: Int = (remainingSeconds % 3600) % 60
+                    if (formatSeconds < 10) {
+                        displaySeconds = "0" + String(formatSeconds)
+                    } else {
+                        displaySeconds = String((remainingSeconds % 3600) % 60)
+                    }
+                } else {
+                    displayHours = "--"
+                    displayMinutes = "--"
+                    displaySeconds = "--"
+                    
+                    timer.invalidate()
+                }
+            }
+        } else {
+            displayHours = "-1"
+        }
+    }
+    
+    
     var body: some View {
         VStack {
-            SubTitleView(text: "Prochain défi dans")
+            Text("Prochain défi dans")
+                .font(.subheadline)
+                .foregroundColor(Color("TertiaryColor"))
             ZStack {
-                Color("TertiaryColor").cornerRadius(30)
+                Color("TertiaryColor")
+                    .cornerRadius(30)
                     .frame(maxHeight: 116)
                 HStack {
                     Image(systemName: "clock")
@@ -87,20 +126,19 @@ struct TimeBlockView: View {
                         .scaledToFit()
                         .frame(maxWidth: 50)
                     Spacer()
-                    if let remainTime = remainTime {
-                        let calendar = Calendar.current
-                        let currentDate = Date()
-                        let components = calendar.dateComponents([.hour, .minute, .second], from: currentDate, to: remainTime)
-
-                        let hour = components.hour ?? 0
-                        let minute = components.minute ?? 0
-                        let second = components.second ?? 0
-
-                        Text("\(hour):\(minute):\(second)").foregroundColor(Color("SecondColor")).font(.largeTitle)
-                    } else {
+                    if (displayHours == "-1"){
                         Text("Invalid date format").foregroundColor(Color("SecondColor")).font(.largeTitle)
+                    } else {
+                        Text("\(displayHours):\(displayMinutes):\(displaySeconds)")
+                            .foregroundColor(Color("SecondColor"))
+                            .font(.largeTitle)
                     }
-                }.padding(40)
+                }
+                .padding(40)
+            }
+        }.task(id: remainTime) {
+            if let remainTime = remainTime {
+                manageTime(remainingTime: remainTime)
             }
         }
     }
