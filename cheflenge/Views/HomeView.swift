@@ -67,6 +67,8 @@ struct TimeBlockView: View {
     @State var displayMinutes: String = "--"
     @State var displayHours: String = "--"
     
+    @State private var timer: Timer?
+    
     var remainTime: Date? {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ" // Set the desired date format
         return dateFormatter.date(from: dateFromAPI)
@@ -78,7 +80,7 @@ struct TimeBlockView: View {
             let currentDate = Date()
             let components = calendar.dateComponents([.second], from: currentDate, to: remainTime)
             remainingSeconds = components.second ?? 0
-            _ = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
                 if remainingSeconds > 0 {
                     remainingSeconds -= 1
                     displayHours = String(remainingSeconds / 3600)
@@ -133,6 +135,9 @@ struct TimeBlockView: View {
             if let remainTime = remainTime {
                 manageTime(remainingTime: remainTime)
             }
+        }
+        .onDisappear {
+            timer?.invalidate()
         }
     }
 }
