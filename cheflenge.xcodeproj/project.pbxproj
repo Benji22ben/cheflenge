@@ -24,7 +24,6 @@
 		CEFF1A102BBA405B00805862 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A0E2BBA405B00805862 /* HomeView.swift */; };
 		CEFF1A162BBA423600805862 /* RecipeNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A152BBA423600805862 /* RecipeNetwork.swift */; };
 		CEFF1A1B2BBA44CB00805862 /* StrapiPicturesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A1A2BBA44CB00805862 /* StrapiPicturesModel.swift */; };
-		CEFF1A1D2BBB306B00805862 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A1C2BBB306B00805862 /* Media.swift */; };
 		CEFF1A1F2BBB549E00805862 /* ImageFromCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A1E2BBB549E00805862 /* ImageFromCameraView.swift */; };
 		CEFF1A342BBBDE8400805862 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A332BBBDE8400805862 /* ErrorView.swift */; };
 		CEFF1A362BBBDE9E00805862 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFF1A352BBBDE9E00805862 /* CameraView.swift */; };
@@ -55,7 +54,6 @@
 		CEFF1A0E2BBA405B00805862 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		CEFF1A152BBA423600805862 /* RecipeNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeNetwork.swift; sourceTree = "<group>"; };
 		CEFF1A1A2BBA44CB00805862 /* StrapiPicturesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrapiPicturesModel.swift; sourceTree = "<group>"; };
-		CEFF1A1C2BBB306B00805862 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		CEFF1A1E2BBB549E00805862 /* ImageFromCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFromCameraView.swift; sourceTree = "<group>"; };
 		CEFF1A332BBBDE8400805862 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		CEFF1A352BBBDE9E00805862 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
@@ -126,7 +124,6 @@
 				CEA9E6F02BA482E5007377E8 /* RecipeModel.swift */,
 				CEFF1A1A2BBA44CB00805862 /* StrapiPicturesModel.swift */,
 				CE9EEFB22BB9A17B00C60C69 /* API.swift */,
-				CEFF1A1C2BBB306B00805862 /* Media.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -266,7 +263,6 @@
 				CEFF1A342BBBDE8400805862 /* ErrorView.swift in Sources */,
 				CE9EEFB32BB9A17B00C60C69 /* API.swift in Sources */,
 				CEFF1A1B2BBA44CB00805862 /* StrapiPicturesModel.swift in Sources */,
-				CEFF1A1D2BBB306B00805862 /* Media.swift in Sources */,
 				CEFF1A162BBA423600805862 /* RecipeNetwork.swift in Sources */,
 				CEFF1A0F2BBA405B00805862 /* ContentView.swift in Sources */,
 				CEFF1A3F2BBBDF0A00805862 /* FrameManager.swift in Sources */,

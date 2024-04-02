@@ -42,7 +42,7 @@ struct RecipeView: View {
                         }.frame(maxWidth: .infinity, alignment: .leading)
                     }
                 }
-                NavigationLink(destination: CameraView().toolbar(.hidden, for: .tabBar)) {
+                NavigationLink(destination: CameraView(recipeOfTheDay: recipeOfTheDay, recipe: recipeOfTheDay.recipe).toolbar(.hidden, for: .tabBar)) {
                     Text("Valider le défi")
                 }.padding(.horizontal, 30)
                     .padding(.vertical, 20)

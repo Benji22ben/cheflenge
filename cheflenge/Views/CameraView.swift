@@ -35,6 +35,8 @@ import SwiftUI
 struct CameraView: View {
     @StateObject private var model = ContentViewModel()
     @State private var showPicture = false
+    @State var recipeOfTheDay: RecipeOfTheDayNetworkManager
+    @State var recipe: Recipe
 
     var body: some View {
         ZStack {
@@ -44,13 +46,32 @@ struct CameraView: View {
             ErrorView(error: model.error)
         }.sheet(isPresented: $showPicture, content: {
             if let cgImage = model.capturedPhoto {
-                Image(cgImage, scale: 1.0, orientation: .right, label: Text("Coucou"))
-                    .resizable()
+                ZStack {
+                    Image(cgImage, scale: 1.0, orientation: .right, label: Text("Coucou"))
+                        .resizable()
+                    Spacer()
+                    Button(action: {}, label: {
+                        Text("Envoyer cette image")
+                            .padding(.horizontal, 30)
+                            .padding(.vertical, 20)
+                            .background(Color.accentColor)
+                            .foregroundColor(Color.white)
+                            .cornerRadius(10)
+                            .shadow(color: Color.black.opacity(0.3), radius: 5, x: 0, y: 3)
+                    })
+                }
             }
         })
         .onReceive(model.$capturedPhoto) { image in
             if image != nil {
                 showPicture.toggle()
+                guard let image = image else {
+                    return
+                }
+
+                let uiImage = UIImage(cgImage: image)
+
+                recipeOfTheDay.postRecipeOfTheDayPicture(imageData: uiImage.jpegData(compressionQuality: 0.8)!, recipeName: recipeOfTheDay.recipe.title, recipeId: recipeOfTheDay.recipe.id)
             }
         }
     }
@@ -58,7 +79,6 @@ struct CameraView: View {
 
 struct CameraView_Previews: PreviewProvider {
     static var previews: some View {
-        CameraView()
+        CameraView(recipeOfTheDay: RecipeOfTheDayNetworkManager(), recipe: RecipeOfTheDayNetworkManager().recipe)
     }
 }
-

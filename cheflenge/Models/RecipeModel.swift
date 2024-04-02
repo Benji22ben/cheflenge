@@ -2,7 +2,6 @@
 //  RecipeNavigation.swift
 //  cheflenge
 //
-//  Created by Benjamin MARQUES on 15/03/2024.
 //
 
 import Foundation
